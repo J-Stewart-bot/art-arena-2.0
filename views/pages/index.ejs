@@ -1,0 +1,27 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('../partials/_head.ejs') %>
+  </head>
+
+  <body class="container">
+    <header><%- include ('../partials/_header.ejs') %></header>
+    <%- include ('../partials/_body.ejs') %>
+
+    <main>
+      <div class="jumbotron">
+        <h1>This is great</h1>
+        <p>Welcome to templating using EJS</p>
+      </div>
+    </main>
+
+    <footer>
+      <%- include ('../partials/_footer.ejs') %>
+    </footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="socket.js"></script>
+    <script src="canvas.js"></script>
+  </body>
+</html>
