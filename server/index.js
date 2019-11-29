@@ -23,14 +23,14 @@ app.get('/', function (req, res) {
 });
 
 // usernames which are currently connected to the chat
-var usernames = {};
+const usernames = {};
 
 // rooms which are currently available in chat
-var rooms = ['Lobby','Arena #1','Arena #2'];
+const rooms = ['Lobby','Arena #1','Arena #2'];
 const roomImages = {};
 
 // random image
-var img = randomImage();
+let img = randomImage();
 
 io.sockets.on('connection', function (socket) {
 
@@ -63,8 +63,6 @@ io.sockets.on('connection', function (socket) {
     if (room === undefined) {
       let stockImage = randomImage()
       roomImages[newroom] = {reference: stockImage}
-      // console.log(roomImages[newroom])
-      // console.log(newroom)
       socket.leave(socket.room);
       // join new room, received as function parameter
       socket.join(newroom);
@@ -79,17 +77,11 @@ io.sockets.on('connection', function (socket) {
       socket.leave(socket.room);
       // join new room, received as function parameter
       socket.join(newroom);
-
-      // console.log(roomImages[newroom])
-      // console.log(roomImages[newroom].newroom)
-      io.in(newroom).emit('displayreference', roomImages[newroom]);
-      console.log("dub tif")
       // check how many people are in the room after a person joins
       room = io.sockets.adapter.rooms[newroom];
 
       if (room.length === 4) {
-        console.log("here")
-        io.in(socket.room).emit('display-reference', roomImages[newroom].newroom);
+        io.in(newroom).emit('displayreference', roomImages[newroom]);
       }
 
       socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
@@ -118,6 +110,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('donedrawing', function(drawing) {
     roomImages[socket.room][socket.username] = drawing;
     // console.log(Object.keys(roomImages[socket.room]))
+    socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has completed their painting');
     if (Object.keys(roomImages[socket.room]).length === 5) {
       io.in(socket.room).emit('displayphotos', roomImages[socket.room]);
     }
