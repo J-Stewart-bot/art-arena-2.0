@@ -12,7 +12,7 @@ const randomImage = function() {
   const defaultSize = 350;
   const randomNumber = Math.floor(Math.random() * 1048);
   
-  return (`https://picsum.photos/id/${randomNumber}/${defaultSize}/${defaultSize}`);
+  return (`https://picsum.photos/id/${randomNumber}/500/300`);
 };
 
 // routing
@@ -60,7 +60,7 @@ io.sockets.on('connection', function (socket) {
     var room = io.sockets.adapter.rooms[newroom];
     if (room === undefined) {
       let stockImage = randomImage()
-      roomImages[newroom] = {newroom: stockImage}
+      roomImages[newroom] = {reference: stockImage}
       // console.log(roomImages[newroom])
       // console.log(newroom)
       socket.leave(socket.room);
@@ -78,9 +78,17 @@ io.sockets.on('connection', function (socket) {
       // join new room, received as function parameter
       socket.join(newroom);
 
+      // console.log(roomImages[newroom])
+      // console.log(roomImages[newroom].newroom)
+      io.in(newroom).emit('displayreference', roomImages[newroom]);
+      console.log("dub tif")
       // check how many people are in the room after a person joins
       room = io.sockets.adapter.rooms[newroom];
-      // console.log(room.length);
+
+      if (room.length === 4) {
+        console.log("here")
+        io.in(socket.room).emit('display-reference', roomImages[newroom].newroom);
+      }
 
       socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
       // sent message to OLD room
@@ -107,7 +115,7 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('donedrawing', function(drawing) {
     roomImages[socket.room][socket.username] = drawing;
-    console.log(Object.keys(roomImages[socket.room]))
+    // console.log(Object.keys(roomImages[socket.room]))
     if (Object.keys(roomImages[socket.room]).length === 5) {
       io.in(socket.room).emit('displayphotos', roomImages[socket.room]);
     }

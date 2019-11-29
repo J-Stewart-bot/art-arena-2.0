@@ -33,14 +33,17 @@
     let i = 1;
     for (const image of Object.keys(images)) {
       if (image !== "newroom") {
-        const blah = $(`#spot${i}`);
-        blah.attr('src', images[image]);
+        $(`#spot${i}`).attr('src', images[image]);
         i++;
       }
     }
-  }) 
+  })
 
-	function switchRoom(room){
+  socket.on('displayreference', function(images) {
+    $('#reference-image').attr('src', images.reference);
+  })
+
+	function switchRoom(room) {
     socket.emit('switchRoom', room);
 	}
 
@@ -56,10 +59,10 @@
     
     // when the client clicks submit
     $('#drawing-complete').click( function() {
+      //when the client clicks SUBMIT
       $(this).attr("disabled", "disabled");
 			var canvas = document.getElementById('my-canvas');
       var dataURL = canvas.toDataURL();
-      // console.log(dataURL);
 			// tell server to execute 'donedrawing' and send along one parameter
 			socket.emit('donedrawing', dataURL);
 		});
@@ -78,7 +81,11 @@
 	<b>ROOMS</b>
 	<div id="rooms"></div>
 </div>
-<div id="paint-app" style="border: 1px solid black;"></div>
+
+<div id="paint-app" style="border: 1px solid black;">
+  <img id="reference-image" src=""/>
+</div>
+
 <input type="button" id="drawing-complete" value="Submit" />
 <div>
   <img/>
@@ -90,11 +97,23 @@
 </div>
 
 <div>
-    <img id="spot1" src=""/>
-    <img id="spot2"/>
-    <img id="spot3"/>
-    <img id="spot4"/>
+  <div>
+      <img id="spot1" src=""/>
+      <input type="button" value="Vote"/>
   </div>
+  <div>
+      <img id="spot2" src=""/>
+      <input type="button" value="Vote"/>
+  </div>
+  <div>
+      <img id="spot3" src=""/>
+      <input type="button" value="Vote"/>
+  </div>
+  <div>
+      <img id="spot4" src=""/>
+      <input type="button" value="Vote"/>
+  </div>
+</div>
 
 <script>
 
