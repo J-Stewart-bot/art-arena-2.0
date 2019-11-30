@@ -20,9 +20,7 @@
 
   <div id="paint-app">
     <div class="imgRef">
-      <div class="ribbon"> <div class="txt">
-          Draw Me
-      </div></div>
+
      
         <img
           id="mainImage"
@@ -33,21 +31,60 @@
       </div>
     </div>
   </div>
-  <input type="button" id="drawing-complete" value="Submit" />
+  <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
   <div>
     <img />
   </div>
-  <div
-    style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;"
-  >
-    <div id="conversation"></div>
-    <input id="data" style="width:200px;" />
-    <input type="button" id="datasend" value="send" />
-  </div>
 
-  <div>
-    <img id="spot1" src="" />
-    <img id="spot2" />
-    <img id="spot3" />
-    <img id="spot4" />
-  </div>
+<!-- <div class="chat">
+<span id="conversation">
+  <input id="data" />
+  <input type="button" class="btn btn-primary" id="datasend" value="send" />
+</span> -->
+
+<div class="paintings">
+
+    <div class="card">
+      <img id="spot1" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary" type="button" id="vote1" value="Vote" />
+      </div>
+    </div>
+
+    <div class="card">
+        <img id="spot2" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary" type="button" id="vote1" value="Vote" />
+      </div>
+    </div>
+
+    <div class="card">
+        <img id="spot3" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary" type="button" id="vote1" value="Vote" />
+      </div>
+    </div>
+
+    <div class="card">
+        <img id="spot4" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary" type="button" id="vote1" value="Vote" />
+      </div>
+    </div>
+      
+</div>
+
+<div class="chat">
+    <span id="conversation">
+      <input id="data" />
+      <input type="button" class="btn btn-primary" id="datasend" value="send" />
+    </span> 
+</div>
+
+<div  aria-atomic="true" style="position: relative; min-height: 200px;">
+    <div style="position: absolute; top: 0; right: 0;">
+  

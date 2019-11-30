@@ -1,48 +1,68 @@
 /* canvas */
-
 .header {
   padding: 50px;
   background-color: cornflowerblue;
 }
 
 .canvas {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .roomsHeading {
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 10px;
 }
 
 #rooms {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   background-color: chocolate;
   padding: 10px;
 }
 
 #paint-app {
   padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   display: flex;
   border: 5px solid black;
 }
 
 #mainImage {
   border: 5px solid black;
-  flex-shrink: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
 #my-canvas {
   border: 5px solid black;
 }
-/* Stroke animation */
 
+/* Stroke animation */
 #select {
   border: #7c259e;
   color: #7c259e;
@@ -51,28 +71,22 @@
 body {
   margin: 0;
   padding: 0;
-  background: rgba(255, 255, 255, 1);
+  background: white;
 }
 
 .animation {
   width: 100%;
   height: 15px;
   position: absolute;
-  background: linear-gradient(
-    to left,
-    #fd96aa,
-    #fdc996,
-    #fafa61 38px,
-    #96fd96 67%,
-    #96d3fd,
-    #9696fd,
-    #c996fd
-  );
+  background: linear-gradient(to left, #fd96aa, #fdc996, #fafa61 38px, #96fd96 67%, #96d3fd, #9696fd, #c996fd);
   top: 110px;
   left: 0%;
-  transform: translate(0%, 0%);
-  box-shadow: unset;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
 }
+
 .animation:before {
   content: "";
   position: absolute;
@@ -81,8 +95,10 @@ body {
   width: 100%;
   height: 15px;
   background-color: #e9bd8a !important;
-  animation: line 55s linear infinite;
+  -webkit-animation: line 55s linear infinite;
+          animation: line 55s linear infinite;
 }
+
 .animation:after {
   content: "\f1fc";
   font-family: fontAwesome;
@@ -92,11 +108,26 @@ body {
   right: 100%;
   width: -100%;
   height: 100%;
-  animation: line 55s linear infinite;
+  -webkit-animation: line 55s linear infinite;
+          animation: line 55s linear infinite;
   color: #7c259e;
   font-size: 50px;
-  transform: translateY(-36px);
-  animation-timing-function: cubic-brezier(0.75, 0.84, 0, 0.86);
+  -webkit-transform: translateY(-36px);
+          transform: translateY(-36px);
+  -webkit-animation-timing-function: cubic-brezier(0.75, 0.84, 0, 0.86);
+          animation-timing-function: cubic-brezier(0.75, 0.84, 0, 0.86);
+}
+
+@-webkit-keyframes line {
+  0% {
+    left: 100;
+  }
+  99% {
+    left: 99%;
+  }
+  100% {
+    left: 100;
+  }
 }
 
 @keyframes line {
@@ -106,33 +137,69 @@ body {
   99% {
     left: 99%;
   }
-
   100% {
     left: 100;
   }
 }
 
 /*  ribbon over photo */
+.chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  border: 5px solid black;
+}
 
-.ribbon {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  border: 25px solid transparent;
-  border-top: 25px solid #757575;
-  position: absolute;
-  bottom: 20px;
-  right: -50px;
-  padding: 0 10px;
-  width: 120px;
-  color: white;
-  font-family: sans-serif;
-  size: 11px;
+.chat #conversation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  text-align: center;
 }
-.ribbon .txt {
-  position: absolute;
-  top: -20px;
-  left: 20px;
+
+.data {
+  text-align: center;
 }
+
+.paintings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.paintings .card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0.5rem;
+  width: 30rem;
+}
+
+.btn {
+  width: 100%;
+}
+
+.alerts {
+  position: absolute;
+  right: 0;
+  top: 300px;
+  min-height: 50px;
+}
+/*# sourceMappingURL=index.css.map */
