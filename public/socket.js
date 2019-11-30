@@ -8,21 +8,22 @@ socket.on("connect", function() {
 
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on("updatechat", function(username, data) {
+  const randNum = Math.round(Math.random() * 1000000).toString();
   $(".alerts").prepend(
     '<div aria-live="polite" aria-atomic="true" >' +
-      '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" >' +
+      `<div class="toast-${randNum} toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" >` +
       '<b class="toast-header">' +
       username +
-      ':</b><div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" >' +
+      `:</b><div class="toast-${randNum} toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" >` +
       data +
       '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">' +
       '<span aria-hidden="true">&times;</span>' +
       "</button></div></div></div><br>"
   );
-  $(".toast")
+  $(`.toast-${randNum}`)
     .toast("show")
     .on("hidden.bs.toast", function() {
-      $(".alerts").empty();
+      $(`.toast-${randNum}`).remove();
     });
 });
 
