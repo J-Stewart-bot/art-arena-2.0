@@ -10,7 +10,6 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // app.listen(8080);
-// console.log("Connected to 8080");
 server.listen("8080", () => {
   console.log("Server listening on Port 8080");
 });
@@ -20,6 +19,22 @@ const randomImage = function() {
   const randomNumber = Math.floor(Math.random() * 1048);
 
   return `https://picsum.photos/id/${randomNumber}/${defaultSize}/${defaultSize}`;
+};
+
+const determineWinner = function(winners) {
+  let winningValue = 0;
+  let winningPicture = null;
+
+  for (const winner of Object.keys(winners)) {
+    if (winner !== 'total') {
+      if (winners[winner] > winningValue) {
+        winningValue = winners[winner];
+        winningPicture = winner
+      }
+    }
+  }
+  console.log(winningPicture)
+  return winningPicture;
 };
 
 // routing
@@ -43,6 +58,7 @@ const usernames = {};
 // rooms which are currently available in chat
 const rooms = ['Lobby','Arena #1','Arena #2'];
 const roomImages = {};
+const roomVotes = {};
 
 // random image
 let img = randomImage();
@@ -75,9 +91,10 @@ io.sockets.on('connection', function (socket) {
 	socket.on('switchRoom', function(newroom){
     // leave the current room (stored in session)
     var room = io.sockets.adapter.rooms[newroom];
-    if (room === undefined) {
+    if (room === undefined && newroom !== 'Lobby') {
       let stockImage = randomImage()
-      roomImages[newroom] = {reference: stockImage}
+      roomImages[newroom] = {reference: stockImage};
+      roomVotes[newroom] = {total: 0};
       socket.leave(socket.room);
       // join new room, received as function parameter
       socket.join(newroom);
@@ -94,7 +111,6 @@ io.sockets.on('connection', function (socket) {
       socket.join(newroom);
       // check how many people are in the room after a person joins
       room = io.sockets.adapter.rooms[newroom];
-
       if (room.length === 4) {
         io.in(newroom).emit('displayreference', roomImages[newroom]);
       }
@@ -124,12 +140,26 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('donedrawing', function(drawing) {
     roomImages[socket.room][socket.username] = drawing;
-    // console.log(Object.keys(roomImages[socket.room]))
+    // console.log(roomImages[socket.room][socket.username]);
     socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has completed their painting');
     if (Object.keys(roomImages[socket.room]).length === 5) {
+      for (const user of Object.keys(roomImages[socket.room])) {
+        if (user !== 'reference') {
+          roomVotes[socket.room][roomImages[socket.room][user]] = 0;
+        }
+      }
+      console.log(roomVotes);
       io.in(socket.room).emit('displayphotos', roomImages[socket.room]);
     }
-    // need to hide canvas after this occurs to prevent the player from drawing more.
+  })
+
+  socket.on('submitvote', function(key) {
+    roomVotes[socket.room].total += 1;
+    roomVotes[socket.room][key] += 1;
+    if (roomVotes[socket.room].total === 4) {
+      console.log("WE HAVE A WINNER")
+      io.in(socket.room).emit('displaywinner', determineWinner(roomVotes[socket.room]));
+    }
   })
 
 	// when the user disconnects.. perform this
