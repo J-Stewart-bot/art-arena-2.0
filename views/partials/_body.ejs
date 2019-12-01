@@ -2,11 +2,11 @@
 
 
 
-<header class="header">
-    HEADER
-    <div class="animation">TEST</div>
+<header class="heading">
+    ART ARENA
+    
   </header>
-
+<br>
   <div class="roomsHeading">
     <h3>Challenge your friends to an epic battle of art.</h3>
     <p className="App-intro">
@@ -14,24 +14,68 @@
       draw. Once completed all the images will go head-to-head with one
       champion emerging.
     </p>
-    <b>ROOMS</b>
-    <div id="rooms"></div>
-  </div>
+    <div class="animation"></div>
+    <br>
 
-  <div id="paint-app">
-    <div class="imgRef">
-
-     
-        <img
-          id="mainImage"
-          src="https://picsum.photos/500/300"
-          alt="Random"
-        >
-        </img>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+    <h3><b>Arenas</b></h3>
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Arenas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Pick an arena to play in, or stay and chat in the lobby.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Cartoon Cavarn</button>
+          <button type="button" class="btn btn-primary">Photo Frenzy</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
+        </div>
       </div>
     </div>
   </div>
-  <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
+
+
+    
+    <div id="rooms"></div>
+  </div>
+<br>
+  <div class="chat">
+      <span id="conversation">
+        <input id="data" />
+        <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
+      </span> 
+  </div>
+<br>
+  <div id="paint-app">
+    <div class="imgRef">
+        <!-- <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+            
+          </div> -->
+          
+
+        <img class="placeholder-image"
+          id="mainImage"
+          src="https://media.giphy.com/media/MEF1VadKbQBdmd8LCn/giphy.gif"
+          alt="Random"
+        >
+        </img> 
+        <h2 class="waiting">Waiting for friends to join... </h2>
+      </div>
+    </div>
+  <br>
+  <div class="submitButton">
+   <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
   <div>
     <img />
   </div>
@@ -78,13 +122,10 @@
       
 </div>
 
-<div class="chat">
-    <span id="conversation">
-      <input id="data" />
-      <input type="button" class="btn btn-primary" id="datasend" value="send" />
-    </span> 
-</div>
+
 
 <div  aria-atomic="true" style="position: relative; min-height: 200px;">
     <div style="position: absolute; top: 0; right: 0;">
   
+      </div>
+</div>

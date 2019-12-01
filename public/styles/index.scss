@@ -1,9 +1,52 @@
-/* canvas */
+// GLOBAL START
+@import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Gochi+Hand&display=swap");
 
-.header {
+$padding: 1rem;
+$margin: 1rem;
+//Type font
+$font-HEADING: "Delius Unicase", cursive;
+$size-HEADING: 4rem;
+$font-SUB-HEADING: "Averia Sans Libre", cursive;
+$size-SUB-HEADING: 2rem;
+$font-BODY-TEXT: "Gochi Hand", cursive;
+$size-BODY-TEXT: 1rem;
+
+h1 {
+  font-family: $font-HEADING;
+  font-size: $size-HEADING;
+}
+h2 {
+  font-family: $font-SUB-HEADING;
+}
+p {
+  font-family: $font-BODY-TEXT;
+}
+main {
+  padding: 10%;
+}
+
+html {
+  margin: 3%;
+  padding: 2%;
+}
+// GLOBAL END
+
+// HEADER
+.heading {
+  text-align: center;
+  font-family: $font-HEADING;
+  font-size: $size-HEADING;
+  border: 5px solid black;
   padding: 50px;
   background-color: cornflowerblue;
 }
+
+.roomsHeading {
+}
+#rooms {
+  font-family: $font-SUB-HEADING;
+}
+/* canvas */
 
 .canvas {
   display: flex;
@@ -11,16 +54,18 @@
 }
 
 .roomsHeading {
+  font-family: $font-SUB-HEADING;
   text-align: center;
   display: flex;
   flex-direction: column;
   padding: 10px;
+  border: 5px solid black;
 }
 
 #rooms {
   display: flex;
   flex-direction: column;
-  background-color: chocolate;
+  background-color: white;
   padding: 10px;
 }
 
@@ -53,7 +98,7 @@ body {
   padding: 0;
   background: rgba(255, 255, 255, 1);
 }
-
+// coloured line
 .animation {
   z-index: 1;
   width: 100%;
@@ -69,19 +114,20 @@ body {
     #9696fd,
     #c996fd
   );
-  top: 130px;
+  top: 2rem;
   left: 0%;
   transform: translate(0%, 0%);
   box-shadow: unset;
 }
+// cover up line
 .animation:before {
   content: "";
   position: absolute;
   top: -0px;
   left: 0;
   width: 100%;
-  height: 15px;
-  background-color: #e9bd8a !important;
+  height: 16px;
+  background-color: white !important;
   animation: line 55s linear infinite;
 }
 .animation:after {
@@ -151,23 +197,43 @@ body {
     text-align: center;
   }
 }
-.data {
+#data {
+  font-family: $font-BODY-TEXT;
+  font-size: $size-SUB-HEADING;
+  width: initial;
+  margin: $margin;
   text-align: center;
 }
+//Submit button
+.btn {
+  width: 100%;
+}
+
+#datasend {
+  width: initial;
+  margin: $margin;
+}
+
+.submitButton {
+  padding: padding;
+  margin: $margin;
+}
+
+drawing-complete {
+  border: 5px solid black;
+}
+//Paintings
 
 .paintings {
   display: flex;
   flex-flow: wrap;
   justify-content: space-evenly;
+  border: 5px solid black;
   .card {
     display: flex;
     margin: 0.5rem;
     width: 30rem;
   }
-}
-
-.btn {
-  width: 100%;
 }
 
 .alerts {
@@ -176,4 +242,19 @@ body {
   right: 0;
   top: 10%;
   min-height: 50px;
+}
+
+.imgRef {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  padding: 1rem;
+}
+.placeholderimage {
+  padding: 1rem;
+}
+h2.waiting {
+  padding: 1rem;
+  margin: 1rem;
 }

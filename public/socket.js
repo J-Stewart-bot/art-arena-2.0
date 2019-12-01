@@ -86,6 +86,7 @@ $(function() {
     //when the client clicks SUBMIT
     $("#toRemove").css("visibility", "hidden");
     $(this).attr("disabled", "disabled");
+    $(".paintings");
     var canvas = document.getElementById("my-canvas");
     var dataURL = canvas.toDataURL();
     // tell server to execute 'donedrawing' and send along one parameter

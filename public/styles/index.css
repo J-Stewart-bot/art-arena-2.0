@@ -1,9 +1,40 @@
-/* canvas */
-.header {
+@import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Gochi+Hand&display=swap");
+h1 {
+  font-family: "Delius Unicase", cursive;
+  font-size: 4rem;
+}
+
+h2 {
+  font-family: "Averia Sans Libre", cursive;
+}
+
+p {
+  font-family: "Gochi Hand", cursive;
+}
+
+main {
+  padding: 10%;
+}
+
+html {
+  margin: 3%;
+  padding: 2%;
+}
+
+.heading {
+  text-align: center;
+  font-family: "Delius Unicase", cursive;
+  font-size: 4rem;
+  border: 5px solid black;
   padding: 50px;
   background-color: cornflowerblue;
 }
 
+#rooms {
+  font-family: "Averia Sans Libre", cursive;
+}
+
+/* canvas */
 .canvas {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -15,6 +46,7 @@
 }
 
 .roomsHeading {
+  font-family: "Averia Sans Libre", cursive;
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -24,6 +56,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 10px;
+  border: 5px solid black;
 }
 
 #rooms {
@@ -34,7 +67,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: chocolate;
+  background-color: white;
   padding: 10px;
 }
 
@@ -80,7 +113,7 @@ body {
   height: 15px;
   position: absolute;
   background: linear-gradient(to left, #fd96aa, #fdc996, #fafa61 38px, #96fd96 67%, #96d3fd, #9696fd, #c996fd);
-  top: 130px;
+  top: 2rem;
   left: 0%;
   -webkit-transform: translate(0%, 0%);
           transform: translate(0%, 0%);
@@ -94,8 +127,8 @@ body {
   top: -0px;
   left: 0;
   width: 100%;
-  height: 15px;
-  background-color: #e9bd8a !important;
+  height: 16px;
+  background-color: white !important;
   -webkit-animation: line 55s linear infinite;
           animation: line 55s linear infinite;
 }
@@ -170,8 +203,30 @@ body {
   text-align: center;
 }
 
-.data {
+#data {
+  font-family: "Gochi Hand", cursive;
+  font-size: 2rem;
+  width: initial;
+  margin: 1rem;
   text-align: center;
+}
+
+.btn {
+  width: 100%;
+}
+
+#datasend {
+  width: initial;
+  margin: 1rem;
+}
+
+.submitButton {
+  padding: padding;
+  margin: 1rem;
+}
+
+drawing-complete {
+  border: 5px solid black;
 }
 
 .paintings {
@@ -183,6 +238,7 @@ body {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  border: 5px solid black;
 }
 
 .paintings .card {
@@ -193,15 +249,34 @@ body {
   width: 30rem;
 }
 
-.btn {
-  width: 100%;
-}
-
 .alerts {
   position: fixed;
   z-index: 2;
   right: 0;
   top: 10%;
   min-height: 50px;
+}
+
+.imgRef {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.placeholderimage {
+  padding: 1rem;
+}
+
+h2.waiting {
+  padding: 1rem;
+  margin: 1rem;
 }
 /*# sourceMappingURL=index.css.map */
