@@ -1,4 +1,4 @@
-var socket = io.connect("http://localhost:8080");
+var socket = io.connect();
 
 // on connection to server, ask for user's name with an anonymous callback
 socket.on("connect", function() {
@@ -62,9 +62,9 @@ socket.on("displayreference", function(images) {
   $("#mainImage").attr("src", images.reference);
 });
 
-socket.on('displaywinner', function(image) {
+socket.on("displaywinner", function(image) {
   $("#mainImage").attr("src", image);
-})
+});
 
 function switchRoom(room) {
   socket.emit("switchRoom", room);
@@ -84,7 +84,7 @@ $(function() {
   // when the client clicks submit
   $("#drawing-complete").click(function() {
     //when the client clicks SUBMIT
-    $('#toRemove').css('visibility','hidden');
+    $("#toRemove").css("visibility", "hidden");
     $(this).attr("disabled", "disabled");
     var canvas = document.getElementById("my-canvas");
     var dataURL = canvas.toDataURL();
@@ -102,36 +102,36 @@ $(function() {
     }
   });
 
-  $('#vote1').click(function() {
+  $("#vote1").click(function() {
     $(this).attr("disabled", "disabled");
-    $('#vote2').attr("disabled", "disabled");
-    $('#vote3').attr("disabled", "disabled");
-    $('#vote4').attr("disabled", "disabled");
-    let voteFor = document.getElementById('spot1').src;
-    socket.emit('submitvote', voteFor);
-  })
-  $('#vote2').click(function() {
+    $("#vote2").attr("disabled", "disabled");
+    $("#vote3").attr("disabled", "disabled");
+    $("#vote4").attr("disabled", "disabled");
+    let voteFor = document.getElementById("spot1").src;
+    socket.emit("submitvote", voteFor);
+  });
+  $("#vote2").click(function() {
     $(this).attr("disabled", "disabled");
-    $('#vote1').attr("disabled", "disabled");
-    $('#vote3').attr("disabled", "disabled");
-    $('#vote4').attr("disabled", "disabled");
-    let voteFor = document.getElementById('spot2').src;
-    socket.emit('submitvote', voteFor);
-  })
-  $('#vote3').click(function() {
+    $("#vote1").attr("disabled", "disabled");
+    $("#vote3").attr("disabled", "disabled");
+    $("#vote4").attr("disabled", "disabled");
+    let voteFor = document.getElementById("spot2").src;
+    socket.emit("submitvote", voteFor);
+  });
+  $("#vote3").click(function() {
     $(this).attr("disabled", "disabled");
-    $('#vote2').attr("disabled", "disabled");
-    $('#vote1').attr("disabled", "disabled");
-    $('#vote4').attr("disabled", "disabled");
-    let voteFor = document.getElementById('spot3').src;
-    socket.emit('submitvote', voteFor);
-  })
-  $('#vote4').click(function() {
+    $("#vote2").attr("disabled", "disabled");
+    $("#vote1").attr("disabled", "disabled");
+    $("#vote4").attr("disabled", "disabled");
+    let voteFor = document.getElementById("spot3").src;
+    socket.emit("submitvote", voteFor);
+  });
+  $("#vote4").click(function() {
     $(this).attr("disabled", "disabled");
-    $('#vote2').attr("disabled", "disabled");
-    $('#vote3').attr("disabled", "disabled");
-    $('#vote1').attr("disabled", "disabled");
-    let voteFor = document.getElementById('spot4').src;
-    socket.emit('submitvote', voteFor);
-  })
+    $("#vote2").attr("disabled", "disabled");
+    $("#vote3").attr("disabled", "disabled");
+    $("#vote1").attr("disabled", "disabled");
+    let voteFor = document.getElementById("spot4").src;
+    socket.emit("submitvote", voteFor);
+  });
 });
