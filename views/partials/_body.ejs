@@ -1,25 +1,23 @@
 
-
-
-
+<div class="animation"></div>
 <header class="heading">
-    ART ARENA
+     ART <i class="fad logo-left app-logo fa-paint-brush-alt"></i> ARENA 
+    <!-- <i class="fad logo-right fa-paint-brush-alt"></i> -->
     
   </header>
 <br>
   <div class="roomsHeading">
     <h3>Challenge your friends to an epic battle of art.</h3>
-    <p className="App-intro">
+    <p className="app-intro">
       Each user is presented with the same random image that they all must
       draw. Once completed all the images will go head-to-head with one
       champion emerging.
     </p>
-    <div class="animation"></div>
-    <br>
+    
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-    <h3><b>Arenas</b></h3>
+    <h3><b>Select Your Arena</b></h3>
   </button>
   
   <!-- Modal -->
@@ -27,7 +25,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Arenas</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Arena</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -36,8 +34,8 @@
           Pick an arena to play in, or stay and chat in the lobby.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Cartoon Cavarn</button>
-          <button type="button" class="btn btn-primary">Photo Frenzy</button>
+          <button type="button" class="btn btn-primary">Arena #1 : Cartoon Colosseum</button>
+          <button type="button" class="btn btn-primary">Arena #2 : Snapshot Stadium</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
         </div>
       </div>
@@ -51,7 +49,7 @@
 <br>
   <div class="chat">
       <span id="conversation">
-        <input id="data" />
+        <input id="data" placeholder="Type your message here." />
         <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
       </span> 
   </div>

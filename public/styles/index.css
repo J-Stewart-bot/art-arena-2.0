@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Gochi+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Open+Sans&display=swap");
 h1 {
   font-family: "Delius Unicase", cursive;
   font-size: 4rem;
@@ -9,7 +9,13 @@ h2 {
 }
 
 p {
-  font-family: "Gochi Hand", cursive;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+}
+
+.btn {
+  font-family: "Averia Sans Libre", cursive;
+  font-size: 1.5rem;
 }
 
 main {
@@ -21,6 +27,43 @@ html {
   padding: 2%;
 }
 
+.logo-right {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.app-logo {
+  -webkit-animation: app-logo-spin infinite 30s linear;
+          animation: app-logo-spin infinite 30s linear;
+  height: 80px;
+}
+
+@-webkit-keyframes app-logo-spin {
+  from {
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes app-logo-spin {
+  from {
+    -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+header {
+  background: url(/public/styles/images/Art_Arena-bg.png) no-repeat center center fixed;
+}
+
 .heading {
   text-align: center;
   font-family: "Delius Unicase", cursive;
@@ -30,7 +73,13 @@ html {
   background-color: cornflowerblue;
 }
 
+.app-intro {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+}
+
 #rooms {
+  display: none;
   font-family: "Averia Sans Libre", cursive;
 }
 
@@ -204,8 +253,9 @@ body {
 }
 
 #data {
-  font-family: "Gochi Hand", cursive;
+  font-family: "Open Sans", sans-serif;
   font-size: 2rem;
+  color: gray;
   width: initial;
   margin: 1rem;
   text-align: center;
@@ -216,6 +266,8 @@ body {
 }
 
 #datasend {
+  font-family: "Averia Sans Libre", cursive;
+  font-size: 1rem;
   width: initial;
   margin: 1rem;
 }
