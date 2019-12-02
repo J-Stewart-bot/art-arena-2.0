@@ -63,7 +63,11 @@ socket.on("displayreference", function(images) {
 });
 
 socket.on('displaywinner', function(image) {
-  $("#mainImage").attr("src", image);
+  if(image !== null) {
+    $("#mainImage").attr("src", image);
+  } else {
+    $("#mainImage").attr("src", image);
+  }
 })
 
 function switchRoom(room) {

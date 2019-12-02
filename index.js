@@ -4,7 +4,12 @@ var app = express();
 
 var server = http.createServer(app);
 
-var io = require("socket.io").listen(server);
+// var io = require("socket.io").listen(server);
+const io = require('socket.io')(server, {
+  // below are engine.IO options
+  pingTimeout: 30000,
+  pingInterval: 30000
+});
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -23,18 +28,34 @@ const randomImage = function() {
 
 const determineWinner = function(winners) {
   let winningValue = 0;
+  let secondPlace = 0;
   let winningPicture = null;
+  let secondPicture = null
 
   for (const winner of Object.keys(winners)) {
     if (winner !== 'total') {
       if (winners[winner] > winningValue) {
+        secondPlace = winningValue;
+        secondPicture = winningPicture
         winningValue = winners[winner];
-        winningPicture = winner
+        winningPicture = winner;
+      } else if (winners[winner] > secondPlace) {
+        secondPlace = winners[winner];
+        secondPicture = winner;
       }
     }
   }
-  console.log(winningPicture)
-  return winningPicture;
+  if (winningValue === secondPlace) {
+    if (winningValue === 1) {
+      console.log("we have a four way tie");
+      return null
+    } else {
+      console.log("we have a tie");
+      return null
+    }
+  } else {
+    return winningPicture;
+  }
 };
 
 // routing
@@ -134,7 +155,7 @@ io.sockets.on('connection', function (socket) {
       socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
       socket.emit('updaterooms', rooms, newroom);
     } else {
-      console.log("FULL ROOM")
+      console.log("FULL ROOM");
     }
   });
   
