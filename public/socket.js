@@ -10,15 +10,21 @@ socket.on("connect", function() {
 socket.on("updatechat", function(username, data) {
   const randNum = Math.round(Math.random() * 1000000).toString();
   $(".alerts").prepend(
-    '<div aria-live="polite" aria-atomic="true" >' +
-      `<div class="toast-${randNum} toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" >` +
-      '<b class="toast-header">' +
+    `<div role="alert" aria-live="polite" aria-atomic="true" class="toast-${randNum} toast" data-delay="10000">
+    <div id="th" class="toast-header">
+    <i class="fad fa-paint-brush-alt"></i>    
+      <strong class="mr-auto">` +
       username +
-      `:</b><div class="toast-${randNum} toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" >` +
+      `</strong>
+      <small>Just Now</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="tb" class="toast-body">` +
       data +
-      '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">' +
-      '<span aria-hidden="true">&times;</span>' +
-      "</button></div></div></div><br>"
+      `</div>
+  </div>`
   );
   $(`.toast-${randNum}`)
     .toast("show")

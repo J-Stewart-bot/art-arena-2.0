@@ -61,10 +61,16 @@ html {
 }
 
 header {
-  background: url(/public/styles/images/Art_Arena-bg.png) no-repeat center center fixed;
+  background: url() no-repeat center center fixed;
+}
+
+.bgImage {
+  visibility: hidden;
 }
 
 .heading {
+  background-image: url(https://raw.githubusercontent.com/Justin-Lighthouse/art-arena-2.0/styletheme/public/styles/images/Art_Arena-bg.png);
+  top: 20px;
   text-align: center;
   font-family: "Delius Unicase", cursive;
   font-size: 4rem;
@@ -307,6 +313,10 @@ drawing-complete {
   right: 0;
   top: 10%;
   min-height: 50px;
+}
+
+.toast-header {
+  font-family: 2rem;
 }
 
 .imgRef {
