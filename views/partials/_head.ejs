@@ -39,3 +39,66 @@
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
   crossorigin="anonymous"
 ></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBvk7VDIXQXGMdXsPmfmv-YknjmjPwXOKg",
+    authDomain: "artarena-fb540.firebaseapp.com",
+    databaseURL: "https://artarena-fb540.firebaseio.com",
+    projectId: "artarena-fb540",
+    storageBucket: "artarena-fb540.appspot.com",
+    messagingSenderId: "345973969923",
+    appId: "1:345973969923:web:849e8f42bb0876ae38aa36",
+    measurementId: "G-JHB3M69W1H"
+  };
+</script>
+
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+/>
+
+<script type="text/javascript">
+  // FirebaseUI config.
+  var uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        return true;
+      },
+      uiShown: function() {
+        document.getElementById("loader").style.display = "none";
+      }
+    },
+    signInFlow: "popup",
+    signInSuccessUrl: "https://art-arena.herokuapp.com/",
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID
+    ],
+    // Terms of service url.
+    tosUrl: "<your-tos-url>",
+    // Privacy policy url.
+    privacyPolicyUrl: "<your-privacy-policy-url>"
+  };
+
+  var app = firebase.initializeApp(firebaseConfig);
+  var auth = app.auth();
+  var ui = new firebaseui.auth.AuthUI(auth);
+
+  ui.start(`#firebaseui-auth-container`, uiConfig);
+
+  firebase.analytics();
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>

@@ -21,6 +21,8 @@ const randomImage = function() {
   return `https://picsum.photos/id/${randomNumber}/${defaultSize}/${defaultSize}`;
 };
 
+require("dotenv").config();
+
 const determineWinner = function(winners) {
   let winningValue = 0;
   let winningPicture = null;
