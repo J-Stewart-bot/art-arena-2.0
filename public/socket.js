@@ -68,9 +68,13 @@ socket.on("displayreference", function(images) {
   $("#mainImage").attr("src", images.reference);
 });
 
-socket.on("displaywinner", function(image) {
-  $("#mainImage").attr("src", image);
-});
+socket.on('displaywinner', function(image) {
+  if(image !== null) {
+    $("#mainImage").attr("src", image);
+  } else {
+    $("#mainImage").attr("src", image);
+  }
+})
 
 function switchRoom(room) {
   socket.emit("switchRoom", room);
