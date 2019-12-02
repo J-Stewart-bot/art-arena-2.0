@@ -3,7 +3,7 @@ var socket = io.connect();
 // on connection to server, ask for user's name with an anonymous callback
 socket.on("connect", function() {
   // call the server-side function 'adduser' and send one parameter (value of prompt)
-  socket.emit("adduser", prompt("What's your name?"));
+  socket.emit("adduser", "Guest");
 });
 
 // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -40,16 +40,12 @@ socket.on("updaterooms", function(rooms, current_room) {
   $.each(rooms, function(key, value) {
     if (value == current_room) {
       $(".toast").toast("show");
-      $("#rooms").append("<div>" + value + "</div>");
+      // $("#rooms").append("<div>" + value + "</div>");
     } else {
       $(".toast").toast("show");
-      $("#rooms").append(
-        '<div><a href="#" onclick="switchRoom(\'' +
-          value +
-          "')\">" +
-          value +
-          "</a></div>"
-      );
+      // $("#rooms").append(
+      //   '<div><a onclick="switchRoom(\'' + value + "')\">" + value + "</a></div>"
+      // );
     }
   });
 });
