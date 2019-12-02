@@ -72,6 +72,7 @@
 
 <script type="text/javascript">
   // FirebaseUI config.
+  const URL = "https://art-arena.herokuapp.com/";
   var uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
@@ -82,7 +83,7 @@
       }
     },
     signInFlow: "popup",
-    signInSuccessUrl: "https://art-arena.herokuapp.com/",
+    signInSuccessUrl: "/",
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID
@@ -97,8 +98,18 @@
   var auth = app.auth();
   var ui = new firebaseui.auth.AuthUI(auth);
 
+  $( document ).ready(function() {
+  console.log( "testing.." );
+  var user = firebase.auth.currentUser;
+  console.log(user);
+});
+
   ui.start(`#firebaseui-auth-container`, uiConfig);
 
   firebase.analytics();
+
+
+
+
 </script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>

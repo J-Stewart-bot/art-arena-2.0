@@ -8,15 +8,57 @@
 
   <body class="container">
     <header><%- include ('../partials/_header.ejs') %></header>
-    <%- include ('../partials/_body.ejs') %>
+    <div class="authorized">
+      <%- include ('../partials/_body.ejs') %>
 
-    <main></main>
-
+      <main></main>
+    </div>
     <footer>
       <%- include ('../partials/_footer.ejs') %>
     </footer>
     <script src="/socket.io/socket.io.js"></script>
     <script src="socket.js"></script>
     <script src="canvas.js"></script>
+    <script>
+      $(function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            console.log("User is signed in");
+            $(".authorized").show();
+          } else {
+            console.log("No user is signed in");
+            $(".authorized").hide();
+          }
+        });
+
+        //   console.log("ready!");
+        //   let user = firebase.auth().currentUser;
+        //   console.log("USER =>", user);
+        //   debugger;
+        //   if (user) {
+        //     console.log("User is signed in");
+        //     $(".authorized").show();
+        //   } else {
+        //     console.log("No user is signed in");
+        //     $(".authorized").hide();
+        //   }
+      });
+    </script>
+
+    <script>
+      $("#logout").click(function() {
+        firebase
+          .auth()
+          .signOut()
+          .then(function() {
+            console.log("Signed out");
+
+            // Sign-out successful.
+          })
+          .catch(function(error) {
+            // An error happened.
+          });
+      });
+    </script>
   </body>
 </html>
