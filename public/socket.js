@@ -41,7 +41,7 @@ socket.on("updaterooms", function(rooms, current_room) {
     if (value == current_room) {
       $(".toast").toast("show");
       // $("#rooms").append("<div>" + value + "</div>");
-      console.log(current_room)
+      //console.log(current_room)
     } else {
       $(".toast").toast("show");
       // $("#rooms").append(
@@ -68,7 +68,7 @@ socket.on("displayphotos", function(images) {
 
 socket.on("displayreference", function(images) {
   $("#mainImage").attr("src", images.reference);
-  $('.btn').css("visibility", "visible");
+  $(".btn").css("visibility", "visible");
 });
 
 socket.on("displaywinner", function(image) {

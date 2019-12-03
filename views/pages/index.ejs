@@ -23,7 +23,7 @@
       $(function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            console.log("User is signed in");
+            // console.log("User is signed in");
             $(".authorized").show();
             $("#firebaseui-auth-container").hide();
             $("#userProfile").append(
@@ -44,7 +44,7 @@
                 .auth()
                 .signOut()
                 .then(function() {
-                  console.log("Signed out");
+                  // console.log("Signed out");
                   $("#userInfo").empty();
                   $(".authorized").hide();
                   $("#firebaseui-auth-container").show();
@@ -54,7 +54,7 @@
                 });
             });
           } else {
-            console.log("No user is signed in");
+            //console.log("No user is signed in");
             $(".authorized").hide();
           }
         });

@@ -101,7 +101,7 @@ controls.tool = function(cx) {
 
 // color module
 controls.color = function(cx) {
-  var input = elt("input", { type: "color" });
+  let input = elt("input", { type: "color" });
 
   // on change, set the new color style for fill and stroke
   input.addEventListener("change", function() {
@@ -113,10 +113,111 @@ controls.color = function(cx) {
 
 // brush size module
 controls.brushSize = function(cx) {
-  var select = elt("select");
+  let select = elt("select");
   // select.classList.add("select");
   // various brush sizes
-  var sizes = [1, 5, 25, 50, 75, 100];
+  let sizes = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ];
 
   // build up a select group of size options
   sizes.forEach(function(size) {
@@ -145,73 +246,135 @@ controls.save = function(cx) {
   return link;
 };
 
-controls.cloudSave = function(cx) {
-  let link = document.createElement("a");
-  link.innerHTML = "cloudSave";
-  link.addEventListener(
-    "click",
-    function() {
-      const file = cx.canvas.toDataURL();
-      const randomNum = Math.random() * 100000000000000000;
-      const uid = firebase.auth().currentUser.uid;
+const save = dir => {
+  const file = document.getElementById("my-canvas").toDataURL();
+  const randomNum = Math.random() * 100000000000000000;
+  const uid = firebase.auth().currentUser.uid;
 
-      // Create the file metadata
-      const metadata = {
-        contentType: "data_url"
-      };
+  // Create the file metadata
+  const metadata = {
+    contentType: "data_url"
+  };
 
-      // Upload file and metadata to the object 'images/mountains.jpg'
-      let uploadTask = storageRef
-        .child(uid + "/" + randomNum.toString())
-        .putString(file, "data_url");
+  // Upload file and metadata to the object 'images/mountains.jpg'
+  let uploadTask = storageRef
+    .child(uid + "/" + randomNum.toString())
+    .putString(file, "data_url");
 
-      // Listen for state changes, errors, and completion of the upload.
-      uploadTask.on(
-        firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-        function(snapshot) {
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          var progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-              console.log("Upload is paused");
-              break;
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-              console.log("Upload is running");
-              break;
-          }
-        },
-        function(error) {
-          // A full list of error codes is available at
-          // https://firebase.google.com/docs/storage/web/handle-errors
-          switch (error.code) {
-            case "storage/unauthorized":
-              // User doesn't have permission to access the object
-              break;
-
-            case "storage/canceled":
-              // User canceled the upload
-              break;
-
-            case "storage/unknown":
-              // Unknown error occurred, inspect error.serverResponse
-              break;
-          }
-        },
-        function() {
-          // Upload completed successfully, now we can get the download URL
-          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-            console.log("File available at", downloadURL);
-          });
-        }
-      );
+  // Listen for state changes, errors, and completion of the upload.
+  uploadTask.on(
+    firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    function(snapshot) {
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("Upload is " + progress + "% done");
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log("Upload is paused");
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          console.log("Upload is running");
+          break;
+      }
     },
-    false
+    function(error) {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case "storage/unauthorized":
+          // User doesn't have permission to access the object
+          break;
+
+        case "storage/canceled":
+          // User canceled the upload
+          break;
+
+        case "storage/unknown":
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+      }
+    },
+    function() {
+      // Upload completed successfully, now we can get the download URL
+      uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        console.log("File available at", downloadURL);
+      });
+    }
   );
-  document.body.appendChild(link);
+};
+
+controls.cloudSave = function(cx) {
+  let link = elt("button", { type: "button", onclick: "save()" }, "Save");
   return link;
 };
+
+// controls.cloudSave = function(cx) {
+//   let link = document.createElement("a");
+//   link.innerHTML = "cloudSave";
+//   link.addEventListener(
+//     "click",
+//     function() {
+//       const file = cx.canvas.toDataURL();
+//       const randomNum = Math.random() * 100000000000000000;
+//       const uid = firebase.auth().currentUser.uid;
+
+//       // Create the file metadata
+//       const metadata = {
+//         contentType: "data_url"
+//       };
+
+//       // Upload file and metadata to the object 'images/mountains.jpg'
+//       let uploadTask = storageRef
+//         .child(uid + "/" + randomNum.toString())
+//         .putString(file, "data_url");
+
+//       // Listen for state changes, errors, and completion of the upload.
+//       uploadTask.on(
+//         firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+//         function(snapshot) {
+//           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+//           var progress =
+//             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//           console.log("Upload is " + progress + "% done");
+//           switch (snapshot.state) {
+//             case firebase.storage.TaskState.PAUSED: // or 'paused'
+//               console.log("Upload is paused");
+//               break;
+//             case firebase.storage.TaskState.RUNNING: // or 'running'
+//               console.log("Upload is running");
+//               break;
+//           }
+//         },
+//         function(error) {
+//           // A full list of error codes is available at
+//           // https://firebase.google.com/docs/storage/web/handle-errors
+//           switch (error.code) {
+//             case "storage/unauthorized":
+//               // User doesn't have permission to access the object
+//               break;
+
+//             case "storage/canceled":
+//               // User canceled the upload
+//               break;
+
+//             case "storage/unknown":
+//               // Unknown error occurred, inspect error.serverResponse
+//               break;
+//           }
+//         },
+//         function() {
+//           // Upload completed successfully, now we can get the download URL
+//           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+//             console.log("File available at", downloadURL);
+//           });
+//         }
+//       );
+//     },
+//     false
+//   );
+//   document.body.appendChild(link);
+//   return link;
+// };
 
 controls.reset = function(cx) {
   var link = elt("button", { type: "button", onclick: "reset()" }, "Reset");
@@ -453,5 +616,5 @@ tools["Flood Fill"] = function(event, cx) {
 };
 
 // initialize the app
-let appDiv = document.getElementById("paint-app");
+let appDiv = document.getElementById("canvasDiv");
 createPaint(appDiv);

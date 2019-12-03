@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Open+Sans&display=swap");
+html {
+  margin: 5vh;
+  padding: 2%;
+  overflow-x: hidden;
+}
+
 h1 {
   font-family: "Delius Unicase", cursive;
-  font-size: 4rem;
+  font-size: 7vw;
 }
 
 h2 {
@@ -20,11 +26,6 @@ p {
 
 main {
   padding: 10%;
-}
-
-html {
-  margin: 3%;
-  padding: 2%;
 }
 
 .logo-right {
@@ -77,6 +78,7 @@ html {
 }
 
 #userProfile #userInfo {
+  text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,15 +98,11 @@ html {
   border-radius: 50%;
 }
 
-header {
-  background: url() no-repeat center center fixed;
-}
-
 .heading {
   top: 20px;
   text-align: center;
   font-family: "Delius Unicase", cursive;
-  font-size: 4rem;
+  font-size: 7vw;
   border: 5px solid black;
   border-radius: 1rem;
   padding: 50px;
@@ -122,6 +120,11 @@ header {
 }
 
 /* canvas */
+#my-canvas {
+  border: 5px solid black;
+  border-radius: 1rem;
+}
+
 .canvas {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -167,6 +170,7 @@ header {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  text-align: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -180,11 +184,6 @@ header {
   border-radius: 1rem;
   -ms-flex-negative: 0;
       flex-shrink: 0;
-}
-
-#my-canvas {
-  border: 5px solid black;
-  border-radius: 1rem;
 }
 
 /* Stroke animation */
@@ -205,7 +204,7 @@ body {
   height: 15px;
   position: absolute;
   background: linear-gradient(to left, #fd96aa, #fdc996, #fafa61 38px, #96fd96 67%, #96d3fd, #9696fd, #c996fd);
-  top: 2rem;
+  top: 5vh;
   left: 0%;
   -webkit-transform: translate(0%, 0%);
           transform: translate(0%, 0%);
@@ -320,10 +319,9 @@ body {
   padding: padding;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  border: 5px solid black;
   border-radius: 1rem;
   padding: 1rem;
-  visibility: hidden;
+  width: 100%;
 }
 
 #drawing-complete {
@@ -384,6 +382,7 @@ body {
 }
 
 .placeholderimage {
+  width: 100%;
   padding: 1rem;
 }
 

@@ -1,4 +1,9 @@
 // GLOBAL START
+html {
+  margin: 5vh;
+  padding: 2%;
+  overflow-x: hidden;
+}
 
 @import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Open+Sans&display=swap");
 
@@ -7,7 +12,7 @@ $margin: 1rem;
 $round: 1rem;
 //Type font
 $font-HEADING: "Delius Unicase", cursive;
-$size-HEADING: 4rem;
+$size-HEADING: 7vw;
 $font-SUB-HEADING: "Averia Sans Libre", cursive;
 $size-SUB-HEADING: 2rem;
 $font-BODY-TEXT: "Open Sans", sans-serif;
@@ -32,10 +37,6 @@ main {
   padding: 10%;
 }
 
-html {
-  margin: 3%;
-  padding: 2%;
-}
 // GLOBAL END
 
 // HEADER
@@ -63,6 +64,7 @@ html {
   border: 5px solid black;
   border-radius: $round;
   #userInfo {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,7 +79,6 @@ html {
 }
 
 header {
-  background: url() no-repeat center center fixed;
 }
 
 .heading {
@@ -102,6 +103,10 @@ header {
   font-family: $font-SUB-HEADING;
 }
 /* canvas */
+#my-canvas {
+  border: 5px solid black;
+  border-radius: $round;
+}
 
 .canvas {
   display: flex;
@@ -128,11 +133,10 @@ header {
 #paint-app {
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
   padding: 1rem;
-
   // justify-content: space-evenly;
-
   border: 5px solid black;
   border-radius: $round;
 }
@@ -143,10 +147,6 @@ header {
   flex-shrink: 0;
 }
 
-#my-canvas {
-  border: 5px solid black;
-  border-radius: $round;
-}
 /* Stroke animation */
 
 #select {
@@ -175,7 +175,7 @@ body {
     #9696fd,
     #c996fd
   );
-  top: 2rem;
+  top: 5vh;
   left: 0%;
   transform: translate(0%, 0%);
   box-shadow: unset;
@@ -282,10 +282,11 @@ body {
   padding: padding;
   margin-top: $margin;
   margin-bottom: $margin;
-  border: 5px solid black;
+  // border: 5px solid black;
   border-radius: $round;
   padding: $padding;
-  visibility: hidden;
+  width: 100%;
+  // visibility: hidden;
 }
 
 #drawing-complete {
@@ -329,6 +330,7 @@ body {
   padding: 1rem;
 }
 .placeholderimage {
+  width: 100%;
   padding: 1rem;
 }
 h2.waiting {
