@@ -287,7 +287,6 @@ body {
 
 .btn {
   width: 100%;
-  visibility: hidden;
 }
 
 #datasend {
@@ -303,6 +302,7 @@ body {
   margin-bottom: 1rem;
   border: 5px solid black;
   padding: 1rem;
+  visibility: hidden;
 }
 
 #drawing-complete {

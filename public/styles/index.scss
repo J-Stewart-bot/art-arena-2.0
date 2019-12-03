@@ -256,7 +256,6 @@ body {
 //Submit button
 .btn {
   width: 100%;
-  visibility: hidden;
 }
 
 #datasend {
@@ -272,6 +271,7 @@ body {
   margin-bottom: $margin;
   border: 5px solid black;
   padding: $padding;
+  visibility: hidden;
 }
 
 #drawing-complete {
