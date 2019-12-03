@@ -287,6 +287,7 @@ body {
 
 .btn {
   width: 100%;
+  visibility: hidden;
 }
 
 #datasend {
@@ -319,6 +320,7 @@ body {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border: 5px solid black;
+  visibility: hidden;
 }
 
 .paintings .card {

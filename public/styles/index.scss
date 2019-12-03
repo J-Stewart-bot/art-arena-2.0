@@ -83,8 +83,8 @@ header {
   background-color: cornflowerblue;
 }
 
-.roomsHeading {
-}
+// .roomsHeading {
+// }
 .app-intro {
   font-family: $font-BODY-TEXT;
   font-size: $size-BODY-TEXT;
@@ -238,7 +238,6 @@ body {
   flex-direction: column;
   width: 100%;
   border: 5px solid black;
-
   #conversation {
     display: flex;
     order: 1;
@@ -257,6 +256,7 @@ body {
 //Submit button
 .btn {
   width: 100%;
+  visibility: hidden;
 }
 
 #datasend {
@@ -285,6 +285,7 @@ body {
   flex-flow: wrap;
   justify-content: space-evenly;
   border: 5px solid black;
+  visibility: hidden;
   .card {
     display: flex;
     margin: 0.5rem;

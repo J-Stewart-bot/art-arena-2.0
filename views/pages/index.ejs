@@ -37,6 +37,7 @@
               <button class="btn btn-danger" id="logout">logout</button>
               `
             );
+            socket.emit("adduser", firebase.auth().currentUser.displayName);
           } else {
             console.log("No user is signed in");
             $(".authorized").hide();

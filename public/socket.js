@@ -3,7 +3,7 @@ var socket = io.connect();
 // on connection to server, ask for user's name with an anonymous callback
 socket.on("connect", function() {
   // call the server-side function 'adduser' and send one parameter (value of prompt)
-  socket.emit("adduser", "Guest");
+  // socket.emit("adduser", "Guest");
 });
 
 // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -41,6 +41,7 @@ socket.on("updaterooms", function(rooms, current_room) {
     if (value == current_room) {
       $(".toast").toast("show");
       // $("#rooms").append("<div>" + value + "</div>");
+      console.log(current_room)
     } else {
       $(".toast").toast("show");
       // $("#rooms").append(
@@ -55,6 +56,7 @@ socket.on("updaterooms", function(rooms, current_room) {
 });
 
 socket.on("displayphotos", function(images) {
+  $(".paintings").css("visibility", "visible");
   let i = 1;
   for (const image of Object.keys(images)) {
     if (image !== "reference") {
@@ -66,6 +68,7 @@ socket.on("displayphotos", function(images) {
 
 socket.on("displayreference", function(images) {
   $("#mainImage").attr("src", images.reference);
+  $('.btn').css("visibility", "visible");
 });
 
 socket.on("displaywinner", function(image) {
@@ -94,7 +97,6 @@ $(function() {
   // when the client clicks submit
   $("#drawing-complete").click(function() {
     //when the client clicks SUBMIT
-    $("#toRemove").css("visibility", "hidden");
     $(this).attr("disabled", "disabled");
     $(".paintings");
     var canvas = document.getElementById("my-canvas");
