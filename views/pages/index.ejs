@@ -25,6 +25,7 @@
           if (user) {
             console.log("User is signed in");
             $(".authorized").show();
+            socket.emit("adduser", firebase.auth().currentUser.displayName);
           } else {
             console.log("No user is signed in");
             $(".authorized").hide();

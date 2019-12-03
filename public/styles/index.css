@@ -69,7 +69,6 @@ header {
 }
 
 .heading {
-  background-image: url(https://raw.githubusercontent.com/Justin-Lighthouse/art-arena-2.0/styletheme/public/styles/images/Art_Arena-bg.png);
   top: 20px;
   text-align: center;
   font-family: "Delius Unicase", cursive;
@@ -269,6 +268,7 @@ body {
 
 .btn {
   width: 100%;
+  visibility: hidden;
 }
 
 #datasend {
@@ -297,6 +297,7 @@ drawing-complete {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border: 5px solid black;
+  visibility: hidden;
 }
 
 .paintings .card {
@@ -315,8 +316,12 @@ drawing-complete {
   min-height: 50px;
 }
 
-.toast-header {
-  font-family: 2rem;
+#th {
+  font-family: "Averia Sans Libre", cursive;
+}
+
+#tb {
+  font-family: "Open Sans", sans-serif;
 }
 
 .imgRef {
