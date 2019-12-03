@@ -78,6 +78,7 @@ const usernames = {};
 
 // rooms which are currently available in chat
 const rooms = ["Lobby", "Arena #1", "Arena #2"];
+const roomSpotsTaken = {"Lobby": 0, "Arena #1": 0, "Arena #2": 0}
 const roomImages = {};
 const roomVotes = {};
 
@@ -96,6 +97,7 @@ io.sockets.on("connection", function(socket) {
     usernames[username] = username;
     // send client to room 1
     socket.join("Lobby");
+    roomSpotsTaken["Lobby"] += 1;
     // echo to client they've connected
     socket.emit("updatechat", "SERVER", "you have connected to Lobby");
     // echo to room 1 that a person has connected to their room
@@ -118,9 +120,11 @@ io.sockets.on("connection", function(socket) {
       let stockImage = randomImage();
       roomImages[newroom] = { reference: stockImage };
       roomVotes[newroom] = { total: 0 };
+      roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
       // join new room, received as function parameter
       socket.join(newroom);
+      roomSpotsTaken[newroom] += 1;
       socket.emit("updatechat", "SERVER", "you have connected to " + newroom);
       // sent message to OLD room
       socket.broadcast
@@ -137,9 +141,11 @@ io.sockets.on("connection", function(socket) {
         );
       socket.emit("updaterooms", rooms, newroom);
     } else if (newroom !== "Lobby" && room.length < 4) {
+      roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
       // join new room, received as function parameter
       socket.join(newroom);
+      roomSpotsTaken[newroom] += 1;
       // check how many people are in the room after a person joins
       room = io.sockets.adapter.rooms[newroom];
       if (room.length === 4) {
@@ -162,9 +168,11 @@ io.sockets.on("connection", function(socket) {
         );
       socket.emit("updaterooms", rooms, newroom);
     } else if (newroom === "Lobby") {
+      roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
       // join new room, received as function parameter
       socket.join(newroom);
+      roomSpotsTaken[newroom] += 1;
       socket.emit("updatechat", "SERVER", "you have connected to " + newroom);
       // sent message to OLD room
       socket.broadcast
@@ -183,6 +191,8 @@ io.sockets.on("connection", function(socket) {
     } else {
       console.log("FULL ROOM");
     }
+    console.log(roomSpotsTaken)
+    io.emit('updatespots', roomSpotsTaken)
   });
 
   socket.on("donedrawing", function(drawing) {

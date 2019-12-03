@@ -38,7 +38,7 @@
               </div>
               `
             );
-            socket.emit("adduser", firebase.auth().currentUser.displayName);
+            socket.emit("adduser", firebase.auth().currentUser.uid);
             $("#logout").click(function() {
               firebase
                 .auth()
