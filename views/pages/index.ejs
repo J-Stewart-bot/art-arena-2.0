@@ -26,18 +26,33 @@
             console.log("User is signed in");
             $(".authorized").show();
             $("#firebaseui-auth-container").hide();
-            //$("#userPhoto").attr("src", firebase.auth().currentUser.photoURL);
             $("#userProfile").append(
-              `<img
+              `<div id='userInfo'>
+                <img
                 id="userPhoto"
                 src="${firebase.auth().currentUser.photoURL}"
                 alt="User Photo"
               />
               <h2>Welcome ${firebase.auth().currentUser.displayName}</h2>
               <button class="btn btn-danger" id="logout">logout</button>
+              </div>
               `
             );
             socket.emit("adduser", firebase.auth().currentUser.displayName);
+            $("#logout").click(function() {
+              firebase
+                .auth()
+                .signOut()
+                .then(function() {
+                  console.log("Signed out");
+                  $("#userInfo").empty();
+                  $(".authorized").hide();
+                  $("#firebaseui-auth-container").show();
+                })
+                .catch(function(error) {
+                  console.log("ERROR =>", error);
+                });
+            });
           } else {
             console.log("No user is signed in");
             $(".authorized").hide();
@@ -46,18 +61,6 @@
       });
     </script>
 
-    <script>
-      $("#logout").click(function() {
-        firebase
-          .auth()
-          .signOut()
-          .then(function() {
-            console.log("Signed out");
-          })
-          .catch(function(error) {
-            console.log("ERROR =>", error);
-          });
-      });
-    </script>
+    <script></script>
   </body>
 </html>

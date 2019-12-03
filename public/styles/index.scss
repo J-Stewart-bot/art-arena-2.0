@@ -60,6 +60,11 @@ html {
   align-items: center;
   padding: $padding;
   border: 5px solid black;
+  #userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 #userPhoto {

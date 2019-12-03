@@ -42,12 +42,14 @@
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-storage.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
 
 <script>
   // Your web app's Firebase configuration
@@ -98,18 +100,20 @@
   var auth = app.auth();
   var ui = new firebaseui.auth.AuthUI(auth);
 
-  $( document ).ready(function() {
-  console.log( "testing.." );
-  var user = firebase.auth.currentUser;
-  console.log(user);
-});
+  $(document).ready(function() {
+    console.log("testing..");
+    var user = firebase.auth.currentUser;
+    console.log(user);
+  });
 
   ui.start(`#firebaseui-auth-container`, uiConfig);
 
   firebase.analytics();
-
-
-
-
+  var storageRef = firebase.storage().ref();
+  var imagesRef = storageRef.child("images");
+  // var spaceRef = imagesRef.child(fileName);
+  // var path = spaceRef.fullPath;
+  // var name = spaceRef.name;
+  // var imagesRef = spaceRef.parent;
 </script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
