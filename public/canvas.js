@@ -153,6 +153,7 @@ controls.cloudSave = function(cx) {
     function() {
       const file = cx.canvas.toDataURL();
       const randomNum = Math.random() * 100000000000000000;
+      const uid = firebase.auth().currentUser.uid;
 
       // Create the file metadata
       const metadata = {
@@ -161,7 +162,7 @@ controls.cloudSave = function(cx) {
 
       // Upload file and metadata to the object 'images/mountains.jpg'
       let uploadTask = storageRef
-        .child("images/" + randomNum.toString())
+        .child(uid + "/" + randomNum.toString())
         .putString(file, "data_url");
 
       // Listen for state changes, errors, and completion of the upload.

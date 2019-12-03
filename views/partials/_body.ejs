@@ -120,3 +120,29 @@
     
         </div>
   </div>
+
+
+  // Personal Photos
+
+  <!-- <script>
+    const uid = firebase.auth().currentUser.uid;
+    console.log("UID =>", uid);
+    
+    // Create a reference under which you want to list
+var listRef = storageRef.child(uid);
+console.log("LISTREF =>", listRef);
+
+// Find all the prefixes and items.
+listRef.listAll().then(function(res) {
+  res.prefixes.forEach(function(folderRef) {
+    // All the prefixes under listRef.
+    // You may call listAll() recursively on them.
+  });
+  res.items.forEach(function(itemRef) {
+    // All the items under listRef.
+  });
+}).catch(function(error) {
+  // Uh-oh, an error occurred!
+});
+listAll()
+  </script> -->

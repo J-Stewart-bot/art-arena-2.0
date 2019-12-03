@@ -4,6 +4,7 @@
 
 $padding: 1rem;
 $margin: 1rem;
+$round: 1rem;
 //Type font
 $font-HEADING: "Delius Unicase", cursive;
 $size-HEADING: 4rem;
@@ -60,6 +61,7 @@ html {
   align-items: center;
   padding: $padding;
   border: 5px solid black;
+  border-radius: $round;
   #userInfo {
     display: flex;
     flex-direction: column;
@@ -84,6 +86,7 @@ header {
   font-family: $font-HEADING;
   font-size: $size-HEADING;
   border: 5px solid black;
+  border-radius: $round;
   padding: 50px;
   background-color: cornflowerblue;
 }
@@ -112,6 +115,7 @@ header {
   flex-direction: column;
   padding: 10px;
   border: 5px solid black;
+  border-radius: $round;
 }
 
 #rooms {
@@ -130,15 +134,18 @@ header {
   // justify-content: space-evenly;
 
   border: 5px solid black;
+  border-radius: $round;
 }
 
 #mainImage {
   border: 5px solid black;
+  border-radius: $round;
   flex-shrink: 0;
 }
 
 #my-canvas {
   border: 5px solid black;
+  border-radius: $round;
 }
 /* Stroke animation */
 
@@ -243,6 +250,7 @@ body {
   flex-direction: column;
   width: 100%;
   border: 5px solid black;
+  border-radius: $round;
   #conversation {
     display: flex;
     order: 1;
@@ -275,6 +283,7 @@ body {
   margin-top: $margin;
   margin-bottom: $margin;
   border: 5px solid black;
+  border-radius: $round;
   padding: $padding;
   visibility: hidden;
 }
@@ -290,6 +299,7 @@ body {
   flex-flow: wrap;
   justify-content: space-evenly;
   border: 5px solid black;
+  border-radius: $round;
   visibility: hidden;
   .card {
     display: flex;
