@@ -25,23 +25,23 @@
           if (user) {
             console.log("User is signed in");
             $(".authorized").show();
+            $("#firebaseui-auth-container").hide();
+            //$("#userPhoto").attr("src", firebase.auth().currentUser.photoURL);
+            $("#userProfile").append(
+              `<img
+                id="userPhoto"
+                src="${firebase.auth().currentUser.photoURL}"
+                alt="User Photo"
+              />
+              <h2>Welcome ${firebase.auth().currentUser.displayName}</h2>
+              <button class="btn btn-danger" id="logout">logout</button>
+              `
+            );
           } else {
             console.log("No user is signed in");
             $(".authorized").hide();
           }
         });
-
-        //   console.log("ready!");
-        //   let user = firebase.auth().currentUser;
-        //   console.log("USER =>", user);
-        //   debugger;
-        //   if (user) {
-        //     console.log("User is signed in");
-        //     $(".authorized").show();
-        //   } else {
-        //     console.log("No user is signed in");
-        //     $(".authorized").hide();
-        //   }
       });
     </script>
 
@@ -52,11 +52,9 @@
           .signOut()
           .then(function() {
             console.log("Signed out");
-
-            // Sign-out successful.
           })
           .catch(function(error) {
-            // An error happened.
+            console.log("ERROR =>", error);
           });
       });
     </script>

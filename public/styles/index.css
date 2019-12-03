@@ -60,16 +60,33 @@ html {
   }
 }
 
+#userProfile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  border: 5px solid black;
+}
+
+#userPhoto {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 header {
   background: url() no-repeat center center fixed;
 }
 
-.bgImage {
-  visibility: hidden;
-}
-
 .heading {
-  background-image: url(https://raw.githubusercontent.com/Justin-Lighthouse/art-arena-2.0/styletheme/public/styles/images/Art_Arena-bg.png);
   top: 20px;
   text-align: center;
   font-family: "Delius Unicase", cursive;
@@ -127,16 +144,17 @@ header {
 }
 
 #paint-app {
-  padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
   border: 5px solid black;
 }
 
@@ -280,11 +298,15 @@ body {
 
 .submitButton {
   padding: padding;
-  margin: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 5px solid black;
+  padding: 1rem;
 }
 
-drawing-complete {
-  border: 5px solid black;
+#drawing-complete {
+  font-size: 2rem;
+  font-family: "Averia Sans Libre", cursive;
 }
 
 .paintings {
@@ -315,8 +337,12 @@ drawing-complete {
   min-height: 50px;
 }
 
-.toast-header {
-  font-family: 2rem;
+#th {
+  font-family: "Averia Sans Libre", cursive;
+}
+
+#tb {
+  font-family: "Open Sans", sans-serif;
 }
 
 .imgRef {

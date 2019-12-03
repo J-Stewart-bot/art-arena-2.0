@@ -54,20 +54,27 @@ html {
     transform: rotate(0deg);
   }
 }
+#userProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $padding;
+  border: 5px solid black;
+}
+
+#userPhoto {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 
 header {
   background: url() no-repeat center center fixed;
 }
-.bgImage {
-  visibility: hidden;
-}
+
 .heading {
-  // background: url(https://media.istockphoto.com/vectors/baseball-arena-icon-outline-style-vector-id1026693202?k=6&m=1026693202&s=612x612&w=0&h=YNSe0XKU6VrJu64NlO9xJsPkUJy5F6lwsUA3eOdmgqc=)
-  // // no-repeat center center fixed;
-  // background-image: url(https://raw.githubusercontent.com/Justin-Lighthouse/art-arena-2.0/styletheme/public/styles/images/Art_Arena-bg.png);
-
   top: 20px;
-
   text-align: center;
   font-family: $font-HEADING;
   font-size: $size-HEADING;
@@ -110,17 +117,20 @@ header {
 }
 
 #paint-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  display: flex;
+
+  // justify-content: space-evenly;
+
   border: 5px solid black;
 }
 
 #mainImage {
   border: 5px solid black;
   flex-shrink: 0;
+}
 
 #my-canvas {
   border: 5px solid black;
@@ -258,11 +268,15 @@ body {
 
 .submitButton {
   padding: padding;
-  margin: $margin;
+  margin-top: $margin;
+  margin-bottom: $margin;
+  border: 5px solid black;
+  padding: $padding;
 }
 
-drawing-complete {
-  border: 5px solid black;
+#drawing-complete {
+  font-size: $size-SUB-HEADING;
+  font-family: $font-SUB-HEADING;
 }
 //Paintings
 
@@ -288,7 +302,7 @@ drawing-complete {
 #th {
   font-family: $font-SUB-HEADING;
 }
-#tb{
+#tb {
   font-family: $font-BODY-TEXT;
 }
 .imgRef {
