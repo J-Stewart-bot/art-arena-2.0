@@ -55,6 +55,12 @@ socket.on("updaterooms", function(rooms, current_room) {
   );
 });
 
+socket.on('updatespots', function(roomSpotsTaken) {
+  console.log(roomSpotsTaken['Arena #1'])
+  $("#a1Spots").text(`${4 - roomSpotsTaken["Arena #1"]} spots left`);
+  $("#a2Spots").text(`${4 - roomSpotsTaken["Arena #2"]} spots left`);
+});
+
 socket.on("displayphotos", function(images) {
   $(".paintings").css("visibility", "visible");
   let i = 1;
@@ -97,7 +103,7 @@ $(function() {
   // when the client clicks submit
   $("#drawing-complete").click(function() {
     //when the client clicks SUBMIT
-    $(this).attr("disabled", "disabled");
+    $(this).css("visibility", "hidden");
     $(".paintings");
     var canvas = document.getElementById("my-canvas");
     var dataURL = canvas.toDataURL();
