@@ -82,7 +82,7 @@ const usernames = {};
 
 // rooms which are currently available in chat
 const rooms = ["Lobby", "Arena #1", "Arena #2"];
-const roomSpotsTaken = { "Lobby": 0, "Arena #1": 0, "Arena #2": 0 };
+const roomSpotsTaken = { Lobby: 0, "Arena #1": 0, "Arena #2": 0 };
 const roomImages = {};
 const roomVotes = {};
 
@@ -134,7 +134,11 @@ io.sockets.on("connection", function(socket) {
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
-        .emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       // update socket session room title
       socket.room = newroom;
       socket.broadcast
@@ -161,7 +165,11 @@ io.sockets.on("connection", function(socket) {
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
-        .emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       // update socket session room title
       socket.room = newroom;
       socket.broadcast
@@ -182,7 +190,11 @@ io.sockets.on("connection", function(socket) {
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
-        .emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       // update socket session room title
       socket.room = newroom;
       socket.broadcast
@@ -196,12 +208,8 @@ io.sockets.on("connection", function(socket) {
     } else {
       console.log("FULL ROOM");
     }
-<<<<<<< HEAD
     console.log(roomSpotsTaken);
     io.emit("updatespots", roomSpotsTaken);
-=======
-    io.emit('updatespots', roomSpotsTaken)
->>>>>>> bug/fix
   });
 
   socket.on("donedrawing", function(drawing) {
