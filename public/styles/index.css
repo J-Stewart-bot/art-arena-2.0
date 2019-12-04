@@ -1,10 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:700|Delius+Unicase:400,700|Open+Sans&display=swap");
-html {
-  margin: 5vh;
-  padding: 2%;
-  overflow-x: hidden;
-}
-
 h1 {
   font-family: "Delius Unicase", cursive;
   font-size: 7vw;
@@ -123,75 +117,6 @@ body {
   margin: 0;
   padding: 0;
   background: white;
-}
-
-.animation {
-  z-index: 1;
-  width: 100%;
-  height: 15px;
-  position: absolute;
-  background: linear-gradient(to left, #fd96aa, #fdc996, #fafa61 38px, #96fd96 67%, #96d3fd, #9696fd, #c996fd);
-  top: 5vh;
-  left: 0%;
-  -webkit-transform: translate(0%, 0%);
-          transform: translate(0%, 0%);
-  -webkit-box-shadow: unset;
-          box-shadow: unset;
-}
-
-.animation:before {
-  content: "";
-  position: absolute;
-  top: -0px;
-  left: 0;
-  width: 100%;
-  height: 16px;
-  background-color: white !important;
-  -webkit-animation: line 55s linear infinite;
-          animation: line 55s linear infinite;
-}
-
-.animation:after {
-  content: "\f1fc";
-  font-family: fontAwesome;
-  position: absolute;
-  top: 0;
-  left: -1%;
-  right: 100%;
-  width: -100%;
-  height: 100%;
-  -webkit-animation: line 55s linear infinite;
-          animation: line 55s linear infinite;
-  color: #7c259e;
-  font-size: 50px;
-  -webkit-transform: translateY(-45px);
-          transform: translateY(-45px);
-  -webkit-animation-timing-function: cubic-brezier(0.75, 0.84, 0, 0.86);
-          animation-timing-function: cubic-brezier(0.75, 0.84, 0, 0.86);
-}
-
-@-webkit-keyframes line {
-  0% {
-    left: 100;
-  }
-  99% {
-    left: 99%;
-  }
-  100% {
-    left: 100;
-  }
-}
-
-@keyframes line {
-  0% {
-    left: 100;
-  }
-  99% {
-    left: 99%;
-  }
-  100% {
-    left: 100;
-  }
 }
 
 span {
@@ -453,6 +378,31 @@ h2.waiting {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.devs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: "Averia Sans Libre", cursive;
+  font-size: 1rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  place-content: center;
+}
+
+.devs #Terrence {
+  margin: 1rem;
+}
+
+.devs #Justin {
+  margin: 1rem;
 }
 
 #noView {
