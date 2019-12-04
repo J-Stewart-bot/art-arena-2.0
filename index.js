@@ -82,7 +82,7 @@ const usernames = {};
 
 // rooms which are currently available in chat
 const rooms = ["Lobby", "Arena #1", "Arena #2"];
-const roomSpotsTaken = { Lobby: 0, "Arena #1": 0, "Arena #2": 0 };
+const roomSpotsTaken = { "Lobby": 0, "Arena #1": 0, "Arena #2": 0 };
 const roomImages = {};
 const roomVotes = {};
 
@@ -93,11 +93,13 @@ io.sockets.on("connection", function(socket) {
   // when the client emits 'adduser', this listens and executes
   socket.on("adduser", function(username) {
     // store the username in the socket session for this client
-    socket.username = username;
+    let key = username.uid;
+    let value = username.displayName;
+    socket.username = [key, value];
     // store the room name in the socket session for this client
     socket.room = "Lobby";
     // add the client's username to the global list
-    usernames[username] = username;
+    usernames[key] = value;
     // send client to room 1
     socket.join("Lobby");
     roomSpotsTaken["Lobby"] += 1;
@@ -106,14 +108,14 @@ io.sockets.on("connection", function(socket) {
     // echo to room 1 that a person has connected to their room
     socket.broadcast
       .to("Lobby")
-      .emit("updatechat", "SERVER", username + " has connected to this room");
+      .emit("updatechat", "SERVER", value + " has connected to this room");
     socket.emit("updaterooms", rooms, "Lobby");
   });
 
   // when the client emits 'sendchat', this listens and executes
   socket.on("sendchat", function(data) {
     // we tell the client to execute 'updatechat' with 2 parameters
-    io.sockets.in(socket.room).emit("updatechat", socket.username, data);
+    io.sockets.in(socket.room).emit("updatechat", socket.username[1], data);
   });
 
   socket.on("switchRoom", function(newroom) {
@@ -132,7 +134,7 @@ io.sockets.on("connection", function(socket) {
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
-        .emit("updatechat", "SERVER", socket.username + " has left this room");
+        .emit("updatechat", "SERVER", socket.username[1] + " has left this room");
       // update socket session room title
       socket.room = newroom;
       socket.broadcast
@@ -140,7 +142,7 @@ io.sockets.on("connection", function(socket) {
         .emit(
           "updatechat",
           "SERVER",
-          socket.username + " has joined this room"
+          socket.username[1] + " has joined this room"
         );
       socket.emit("updaterooms", rooms, newroom);
     } else if (newroom !== "Lobby" && room.length < 4) {
@@ -159,7 +161,7 @@ io.sockets.on("connection", function(socket) {
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
-        .emit("updatechat", "SERVER", socket.username + " has left this room");
+        .emit("updatechat", "SERVER", socket.username[1] + " has left this room");
       // update socket session room title
       socket.room = newroom;
       socket.broadcast
@@ -167,7 +169,7 @@ io.sockets.on("connection", function(socket) {
         .emit(
           "updatechat",
           "SERVER",
-          socket.username + " has joined this room"
+          socket.username[1] + " has joined this room"
         );
       socket.emit("updaterooms", rooms, newroom);
     } else if (newroom === "Lobby") {
@@ -180,7 +182,7 @@ io.sockets.on("connection", function(socket) {
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
-        .emit("updatechat", "SERVER", socket.username + " has left this room");
+        .emit("updatechat", "SERVER", socket.username[1] + " has left this room");
       // update socket session room title
       socket.room = newroom;
       socket.broadcast
@@ -188,25 +190,28 @@ io.sockets.on("connection", function(socket) {
         .emit(
           "updatechat",
           "SERVER",
-          socket.username + " has joined this room"
+          socket.username[1] + " has joined this room"
         );
       socket.emit("updaterooms", rooms, newroom);
     } else {
       console.log("FULL ROOM");
     }
+<<<<<<< HEAD
     console.log(roomSpotsTaken);
     io.emit("updatespots", roomSpotsTaken);
+=======
+    io.emit('updatespots', roomSpotsTaken)
+>>>>>>> bug/fix
   });
 
   socket.on("donedrawing", function(drawing) {
-    roomImages[socket.room][socket.username] = drawing;
-    // console.log(roomImages[socket.room][socket.username]);
+    roomImages[socket.room][socket.username[0]] = drawing;
     socket.broadcast
       .to(socket.room)
       .emit(
         "updatechat",
         "SERVER",
-        socket.username + " has completed their painting"
+        socket.username[1] + " has completed their painting"
       );
     if (Object.keys(roomImages[socket.room]).length === 5) {
       for (const user of Object.keys(roomImages[socket.room])) {
@@ -214,7 +219,6 @@ io.sockets.on("connection", function(socket) {
           roomVotes[socket.room][roomImages[socket.room][user]] = 0;
         }
       }
-      console.log(roomVotes);
       io.in(socket.room).emit("displayphotos", roomImages[socket.room]);
     }
   });
@@ -223,7 +227,6 @@ io.sockets.on("connection", function(socket) {
     roomVotes[socket.room].total += 1;
     roomVotes[socket.room][key] += 1;
     if (roomVotes[socket.room].total === 4) {
-      console.log("WE HAVE A WINNER");
       io.in(socket.room).emit(
         "displaywinner",
         determineWinner(roomVotes[socket.room])
@@ -241,7 +244,7 @@ io.sockets.on("connection", function(socket) {
     socket.broadcast.emit(
       "updatechat",
       "SERVER",
-      socket.username + " has disconnected"
+      socket.username[1] + " has disconnected"
     );
     socket.leave(socket.room);
   });
