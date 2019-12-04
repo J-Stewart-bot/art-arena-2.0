@@ -319,15 +319,13 @@ span {
 }
 
 .submitButton {
-  display: flex;
+  display: none;
   padding: padding;
   margin-top: $margin;
   margin-bottom: $margin;
-  // border: 5px solid black;
   border-radius: $round;
   padding: $padding;
   width: 100%;
-  // visibility: hidden;
 }
 
 #drawing-complete {
