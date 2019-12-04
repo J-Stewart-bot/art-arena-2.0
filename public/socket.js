@@ -84,6 +84,9 @@ socket.on("displaywinner", function(image) {
   } else {
     $("#mainImage").attr("src", image);
   }
+  $(".winningText").css("display", "flex");
+  $(".votingText").css("display", "none");
+  $("#paintings").css("display", "none");
 });
 
 function switchRoom(room) {
