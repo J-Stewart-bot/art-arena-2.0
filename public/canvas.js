@@ -234,13 +234,18 @@ controls.brushSize = function(cx) {
   return elt("span", null, " Brush size:", select);
 };
 
+
+// Currently needs to be fixed, wont work as a button, will work as text however
 const download = () => {
-  let file = document.getElementById("my-canvas").toDataURL();
-  file.download = "mypainting.png";
-  // return document.body.appendChild(file);
+  var canvas = document.getElementById("my-canvas");
+  image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  var link = document.createElement('a');
+  link.download = "my-image.png";
+  link.href = image;
+  link.click();
 };
 
-controls.download = function(cx) {
+controls.download = function() {
   let link = elt(
     "button",
     { type: "button", class: "btn-info btn download", onclick: "download()" },
@@ -514,64 +519,67 @@ tools.Spray = function(event, cx) {
  * @param {Object} event - mousedown event (specifically left button)
  * @param {Object} cx - the canvas 2d context object
  */
-tools.Rectangle = function(event, cx) {
-  var leftX, rightX, topY, bottomY;
-  var clientX = event.clientX,
-    clientY = event.clientY;
 
-  // placeholder rectangle
-  var placeholder = elt("div", { class: "placeholder" });
+// Needs to be fixed so the place holder will appear properly
 
-  // cache the relative position of mouse x and y on canvas
-  var initialPos = relativePos(event, cx.canvas);
+// tools.Rectangle = function(event, cx) {
+//   var leftX, rightX, topY, bottomY;
+//   var clientX = event.clientX,
+//     clientY = event.clientY;
 
-  // used for determining correct placeholder position
-  var xOffset = clientX - initialPos.x,
-    yOffset = clientY - initialPos.y;
+//   // placeholder rectangle
+//   var placeholder = elt("div", { class: "placeholder" });
 
-  trackDrag(
-    function(event) {
-      document.body.appendChild(placeholder);
+//   // cache the relative position of mouse x and y on canvas
+//   var initialPos = relativePos(event, cx.canvas);
 
-      var currentPos = relativePos(event, cx.canvas);
-      var startX = initialPos.x,
-        startY = initialPos.y;
+//   // used for determining correct placeholder position
+//   var xOffset = clientX - initialPos.x,
+//     yOffset = clientY - initialPos.y;
 
-      // assign leftX, rightX, topY and bottomY
-      if (startX < currentPos.x) {
-        leftX = startX;
-        rightX = currentPos.x;
-      } else {
-        leftX = currentPos.x;
-        rightX = startX;
-      }
+//   trackDrag(
+//     function(event) {
+//       document.getElementById('toRemove').appendChild(placeholder);
 
-      if (startY < currentPos.y) {
-        topY = startY;
-        bottomY = currentPos.y;
-      } else {
-        topY = currentPos.y;
-        bottomY = startY;
-      }
+//       var currentPos = relativePos(event, cx.canvas);
+//       var startX = initialPos.x,
+//         startY = initialPos.y;
 
-      // set the style to reflect current fill
-      placeholder.style.background = cx.fillStyle;
+//       // assign leftX, rightX, topY and bottomY
+//       if (startX < currentPos.x) {
+//         leftX = startX;
+//         rightX = currentPos.x;
+//       } else {
+//         leftX = currentPos.x;
+//         rightX = startX;
+//       }
 
-      // set div.style.left to leftX, width to rightX - leftX
-      placeholder.style.left = leftX + xOffset + "px";
-      placeholder.style.top = topY + yOffset + "px";
-      placeholder.style.width = rightX - leftX + "px";
-      placeholder.style.height = bottomY - topY + "px";
-    },
-    function() {
-      // add rectangle to canvas with leftX, rightX, topY and bottomY
-      cx.fillRect(leftX, topY, rightX - leftX, bottomY - topY);
+//       if (startY < currentPos.y) {
+//         topY = startY;
+//         bottomY = currentPos.y;
+//       } else {
+//         topY = currentPos.y;
+//         bottomY = startY;
+//       }
 
-      // destroy placeholder
-      document.body.removeChild(placeholder);
-    }
-  );
-};
+//       // set the style to reflect current fill
+//       placeholder.style.background = cx.fillStyle;
+
+//       // set div.style.left to leftX, width to rightX - leftX
+//       placeholder.style.left = leftX + xOffset + "px";
+//       placeholder.style.top = topY + yOffset + "px";
+//       placeholder.style.width = rightX - leftX + "px";
+//       placeholder.style.height = bottomY - topY + "px";
+//     },
+//     function() {
+//       // add rectangle to canvas with leftX, rightX, topY and bottomY
+//       cx.fillRect(leftX, topY, rightX - leftX, bottomY - topY);
+
+//       // destroy placeholder
+//       document.getElementById('toRemove').removeChild(placeholder);
+//     }
+//   );
+// };
 
 /**
     draw a circle based on mouse position, color and pen size.
