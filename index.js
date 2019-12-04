@@ -20,12 +20,16 @@ server.listen(process.env.PORT || 8080, () => {
 
 // Random Cartoon
 // https://robohash.org/khjasfghjgdflkjb.png?set=set2
-// const randomNum = Math.random() * 100000000000000000;
+const randomCartoon = () => {
+  const randomNum = Math.floor(Math.random() * 10000000);
+  const setNum = Math.ceil(Math.random() * 5);
+  return `https://robohash.org/${randomNum}.png?set=set${setNum}`;
+};
 
 const randomImage = function() {
   const defaultWidth = 500;
   const defaultHeight = 300;
-  const randomNumber = Math.floor(Math.random() * 1048);
+  const randomNumber = Math.ceil(Math.random() * 1048);
   console.log(
     "Random Image",
     `https://picsum.photos/id/${randomNumber}/${defaultWidth}/${defaultHeight}`

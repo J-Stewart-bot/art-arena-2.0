@@ -1,33 +1,44 @@
 <!-- views/pages/index.ejs -->
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%- include ('../partials/_head.ejs') %>
-  </head>
+<wrapper id="wrapper">
+  <html lang="en">
+    <head>
+      <%- include ('../partials/_head.ejs') %>
+    </head>
 
-  <body class="container">
-    <header><%- include ('../partials/_header.ejs') %></header>
-    <div class="authorized">
-      <%- include ('../partials/_body.ejs') %>
+    <body class="container">
+      <header><%- include ('../partials/_header.ejs') %></header>
+      <div class="mobileMessage">
+        <img
+          id="noView"
+          src="https://media.giphy.com/media/5YNq7UyHPfQm4/giphy.gif"
+        />
+        <h2>Oh No!</h2>
+        <p>
+          We love that you want to use Art Arena on your phone. Unfortanatly, we
+          need a bit more time to make this happen.
+        </p>
+      </div>
+      <div class="authorized">
+        <%- include ('../partials/_body.ejs') %>
+      </div>
 
-      <main></main>
-    </div>
-    <footer>
-      <%- include ('../partials/_footer.ejs') %>
-    </footer>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="socket.js"></script>
-    <script src="canvas.js"></script>
-    <script>
-      $(function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            // console.log("User is signed in");
-            $(".authorized").show();
-            $("#firebaseui-auth-container").hide();
-            $("#userProfile").append(
-              `<div id='userInfo'>
+      <footer>
+        <%- include ('../partials/_footer.ejs') %>
+      </footer>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="socket.js"></script>
+      <script src="canvas.js"></script>
+      <script>
+        $(function() {
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // console.log("User is signed in");
+              $(".authorized").show();
+              $("#firebaseui-auth-container").hide();
+              $("#userProfile").append(
+                `<div id='userInfo'>
                 <img
                 id="userPhoto"
                 src="${firebase.auth().currentUser.photoURL}"
@@ -37,30 +48,29 @@
               <button class="btn btn-danger" id="logout">logout</button>
               </div>
               `
-            );
-            socket.emit("adduser", firebase.auth().currentUser);
-            $("#logout").click(function() {
-              firebase
-                .auth()
-                .signOut()
-                .then(function() {
-                  // console.log("Signed out");
-                  $("#userInfo").empty();
-                  $(".authorized").hide();
-                  $("#firebaseui-auth-container").show();
-                })
-                .catch(function(error) {
-                  console.log("ERROR =>", error);
-                });
-            });
-          } else {
-            //console.log("No user is signed in");
-            $(".authorized").hide();
-          }
+              );
+              socket.emit("adduser", firebase.auth().currentUser);
+              $("#logout").click(function() {
+                firebase
+                  .auth()
+                  .signOut()
+                  .then(function() {
+                    // console.log("Signed out");
+                    $("#userInfo").empty();
+                    $(".authorized").hide();
+                    $("#firebaseui-auth-container").show();
+                  })
+                  .catch(function(error) {
+                    console.log("ERROR =>", error);
+                  });
+              });
+            } else {
+              //console.log("No user is signed in");
+              $(".authorized").hide();
+            }
+          });
         });
-      });
-    </script>
-
-    <script></script>
-  </body>
-</html>
+      </script>
+    </body>
+  </html>
+</wrapper>

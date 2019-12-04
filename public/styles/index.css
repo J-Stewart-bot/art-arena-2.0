@@ -454,4 +454,48 @@ h2.waiting {
   display: -ms-flexbox;
   display: flex;
 }
+
+#noView {
+  display: none;
+  width: 50vw;
+}
+
+.mobileMessage {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .mobileMessage {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 1rem;
+    border: 5px solid black;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    visibility: visible;
+  }
+  #noView {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    visibility: visible;
+    width: 50vw;
+  }
+  .authorized {
+    display: none;
+    visibility: hidden;
+  }
+  #userProfile {
+    display: none;
+  }
+}
 /*# sourceMappingURL=index.css.map */

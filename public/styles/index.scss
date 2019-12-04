@@ -1,5 +1,6 @@
 // GLOBAL START
-html {
+#wrapper {
+  position: relative
   margin: 5vh;
   padding: 2%;
   overflow-x: hidden;
@@ -388,4 +389,40 @@ h2.waiting {
 
 .vote {
   display: flex;
+}
+
+// MOBILE VIEW
+
+#noView {
+  display: none;
+  width: 50vw;
+}
+.mobileMessage {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .mobileMessage {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: $padding;
+    border: 5px solid black;
+    margin-top: $margin;
+    border-radius: $round;
+    visibility: visible;
+  }
+  #noView {
+    display: flex;
+    visibility: visible;
+    width: 50vw;
+  }
+  .authorized {
+    display: none;
+    visibility: hidden;
+  }
+  #userProfile {
+    display: none;
+  }
 }
