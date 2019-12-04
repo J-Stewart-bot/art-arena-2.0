@@ -79,7 +79,7 @@ function randomPointInRadius(radius) {
 var controls = Object.create(null);
 
 controls.tool = function(cx) {
-  var select = elt("select");
+  let select = elt("select", { class: "btn btn-primary dropdown-toggle" });
 
   // populate the tools
   for (var name in tools) select.appendChild(elt("option", null, name));
@@ -96,12 +96,16 @@ controls.tool = function(cx) {
     }
   });
 
-  return elt("span", null, "Tool: ", select);
+  return elt("span", null, "Tool:", select);
 };
 
 // color module
 controls.color = function(cx) {
-  let input = elt("input", { type: "color" });
+  let input = elt("input", {
+    type: "color",
+    class: "btn btn-primary",
+    style: "height:4rem"
+  });
 
   // on change, set the new color style for fill and stroke
   input.addEventListener("change", function() {
@@ -113,7 +117,7 @@ controls.color = function(cx) {
 
 // brush size module
 controls.brushSize = function(cx) {
-  let select = elt("select");
+  let select = elt("select", { class: "btn btn-primary dropdown-toggle" });
   // select.classList.add("select");
   // various brush sizes
   let sizes = [
@@ -231,21 +235,58 @@ controls.brushSize = function(cx) {
   return elt("span", null, "Brush size: ", select);
 };
 
-controls.save = function(cx) {
-  var link = document.createElement("a");
-  link.innerHTML = "download";
-  link.addEventListener(
-    "click",
-    function(ev) {
-      link.href = cx.canvas.toDataURL();
-      link.download = "mypainting.png";
-    },
-    false
+const download = () => {
+  let file = document.getElementById("my-canvas").toDataURL();
+  file.download = "mypainting.png";
+  // return document.body.appendChild(file);
+};
+
+controls.download = function(cx) {
+  let link = elt(
+    "button",
+    { type: "button", class: "btn-info btn download", onclick: "download()" },
+    "Download"
   );
-  document.body.appendChild(link);
   return link;
 };
 
+//   return link;
+//   var link = document.createElement("a");
+//   link.innerHTML = "download";
+//   link.addEventListener(
+//     "click",
+//     function(ev) {
+//       link.href = cx.canvas.toDataURL();
+//       link.download = "mypainting.png";
+//     },
+//     false
+//   );
+//
+// };
+
+// controls.save = function(cx) {
+//   var link = document.createElement("a");
+//   link.innerHTML = "download";
+//   link.addEventListener(
+//     "click",
+//     function(ev) {
+//       link.href = cx.canvas.toDataURL();
+//       link.download = "mypainting.png";
+//     },
+//     false
+//   );
+//   document.body.appendChild(link);
+//   return link;
+// };
+
+// controls.cloudSave = function(cx) {
+//   let link = elt(
+//     "button",
+//     { type: "button", class: "btn-primary btn", onclick: "save()" },
+//     "Save"
+//   );
+//   return link;
+// };
 const save = dir => {
   const file = document.getElementById("my-canvas").toDataURL();
   const randomNum = Math.random() * 100000000000000000;
@@ -304,11 +345,6 @@ const save = dir => {
       });
     }
   );
-};
-
-controls.cloudSave = function(cx) {
-  let link = elt("button", { type: "button", onclick: "save()" }, "Save");
-  return link;
 };
 
 // controls.cloudSave = function(cx) {
@@ -380,7 +416,11 @@ controls.cloudSave = function(cx) {
 // };
 
 controls.reset = function(cx) {
-  var link = elt("button", { type: "button", onclick: "reset()" }, "Reset");
+  let link = elt(
+    "button",
+    { type: "button", class: "btn btn-danger reset", onclick: "reset()" },
+    "Reset"
+  );
   return link;
 };
 

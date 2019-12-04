@@ -20,6 +20,7 @@ server.listen(process.env.PORT || 8080, () => {
 
 // Random Cartoon
 // https://robohash.org/khjasfghjgdflkjb.png?set=set2
+// const randomNum = Math.random() * 100000000000000000;
 
 const randomImage = function() {
   const defaultWidth = 500;

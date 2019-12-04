@@ -113,6 +113,10 @@ pre {
   background-color: cornflowerblue;
 }
 
+span {
+  font-family: "Averia Sans Libre", cursive;
+}
+
 .app-intro {
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
@@ -346,6 +350,14 @@ body {
   font-size: 1rem;
   width: initial;
   margin: 1rem;
+}
+
+.download {
+  margin-top: 1rem;
+}
+
+.reset {
+  margin-top: 1rem;
 }
 
 .submitButton {

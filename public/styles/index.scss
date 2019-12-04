@@ -40,6 +40,7 @@ main {
 pre {
   white-space: pre-wrap;
 }
+
 // GLOBAL END
 
 // HEADER
@@ -97,6 +98,10 @@ header {
 
 // .roomsHeading {
 // }
+span {
+  font-family: $font-SUB-HEADING;
+}
+
 .app-intro {
   font-family: $font-BODY-TEXT;
   font-size: $size-BODY-TEXT;
@@ -299,6 +304,14 @@ body {
   font-size: $size-BODY-TEXT;
   width: initial;
   margin: $margin;
+}
+
+.download {
+  margin-top: $margin;
+}
+
+.reset {
+  margin-top: $margin;
 }
 
 .submitButton {
