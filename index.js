@@ -1,8 +1,8 @@
-var express = require("express");
-var http = require("http");
-var app = express();
+const express = require("express");
+const http = require("http");
+const app = express();
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 // var io = require("socket.io").listen(server);
 const io = require("socket.io")(server, {
@@ -17,6 +17,9 @@ app.set("view engine", "ejs");
 server.listen(process.env.PORT || 8080, () => {
   console.log("Server listening on Port 8080");
 });
+
+// Random Cartoon
+// https://robohash.org/khjasfghjgdflkjb.png?set=set2
 
 const randomImage = function() {
   const defaultWidth = 500;
@@ -104,7 +107,7 @@ io.sockets.on("connection", function(socket) {
     socket.join("Lobby");
     roomSpotsTaken["Lobby"] += 1;
     // echo to client they've connected
-    socket.emit("updatechat", "SERVER", "you have connected to Lobby");
+    socket.emit("updatechat", "SERVER", "You have connected to Lobby");
     // echo to room 1 that a person has connected to their room
     socket.broadcast
       .to("Lobby")
@@ -120,7 +123,7 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("switchRoom", function(newroom) {
     // leave the current room (stored in session)
-    var room = io.sockets.adapter.rooms[newroom];
+    let room = io.sockets.adapter.rooms[newroom];
     if (room === undefined && newroom !== "Lobby") {
       let stockImage = randomImage();
       roomImages[newroom] = { reference: stockImage };
@@ -130,7 +133,7 @@ io.sockets.on("connection", function(socket) {
       // join new room, received as function parameter
       socket.join(newroom);
       roomSpotsTaken[newroom] += 1;
-      socket.emit("updatechat", "SERVER", "you have connected to " + newroom);
+      socket.emit("updatechat", "SERVER", "You have connected to " + newroom);
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
@@ -161,7 +164,7 @@ io.sockets.on("connection", function(socket) {
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
 
-      socket.emit("updatechat", "SERVER", "you have connected to " + newroom);
+      socket.emit("updatechat", "SERVER", "You have connected to " + newroom);
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)
@@ -186,7 +189,7 @@ io.sockets.on("connection", function(socket) {
       // join new room, received as function parameter
       socket.join(newroom);
       roomSpotsTaken[newroom] += 1;
-      socket.emit("updatechat", "SERVER", "you have connected to " + newroom);
+      socket.emit("updatechat", "SERVER", "You have connected to " + newroom);
       // sent message to OLD room
       socket.broadcast
         .to(socket.room)

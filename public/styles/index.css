@@ -28,6 +28,10 @@ main {
   padding: 10%;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 .logo-right {
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
@@ -120,19 +124,38 @@ main {
 }
 
 /* canvas */
-.playingText {
-  display: none;
-}
-
 .waitingText {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
+.playingText {
+  display: none;
+}
+
+.votingText {
+  display: none;
+}
+
+.winningText {
+  display: none;
+}
+
+.drawingURL {
+  margin-top: 1rem;
+  display: none;
+}
+
 #my-canvas {
   border: 5px solid black;
   border-radius: 1rem;
+}
+
+#canvasDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .canvas {
@@ -401,5 +424,11 @@ body {
 h2.waiting {
   padding: 1rem;
   margin: 1rem;
+}
+
+.vote {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=index.css.map */

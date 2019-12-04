@@ -1,23 +1,24 @@
 
 <div class="animation"></div>
 
-<br>
-  <div class="roomsHeading">
+  <br>
+<!-- Start of the rooms section -->
+<div class="roomsHeading">
     <h3>Challenge your friends to an epic battle of art.</h3>
     <p className="app-intro">
       Each user is presented with the same random image that they all must
       draw. Once completed all the images will go head-to-head with one
       champion emerging.
     </p>
-  
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-    <h3><b>Select Your Arena</b></h3>
-</button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+      <h3><b>Select Your Arena</b></h3>
+  </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -38,20 +39,17 @@
     </div>
   </div>
     <br>
-  <div id='currentRoom'>
-    
-
-  </div>
-
-    <div id="rooms"></div>
-  </div>
-<br>
-  <div class="chat">
-      <span id="conversation">
-        <input id="data" placeholder="Type your message here." />
-        <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
-      </span> 
-  </div>
+  <div id='currentRoom'></div>
+  <div id="rooms"></div>
+</div> 
+<!-- End of the rooms section -->
+  <br>
+<div class="chat">
+    <span id="conversation">
+      <input id="data" placeholder="Type your message here." />
+      <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
+    </span> 
+</div>
 <br>
   <div id="paint-app">
     <div class="imgRef">
@@ -68,11 +66,31 @@
         <h2 class="waiting"><div class="spinner-border text-warning" role="status"></div> Waiting for friends to join... </h2>
     </div>
     <div class="playingText"><h2 class="playing">Go Ahead! Draw a happy little picture.</h2></div>
-    <div id="canvasDiv"></div>
-<div class="submitButton">
+    
+    <div class="votingText"><h2 class="voting">Once everyone finishes drawing, it'll be time to vote. Feel free to chat in the mean time. </h2>
+    </div>
+
+    <div class="winningText"><h2 class="winner">WE HAVE A WINNER!!</h2>
+      <button class="btn-primary btn" id="return">Return to the Lobby</button>
+    </div>
+
+  <div id="canvasDiv"></div> 
+
+  <div class="drawingURL">
+      <div class="card" style="width: 100%;">
+          <img id="myDrawing" src="..." class="card-img-top" alt="My Beautiful Drawing">
+          <div class="card-body">
+            <h2 class="card-title">Your Drawing</h2>
+            <p class="card-text myDrawingText">Wow!!! That's beautiful. So good in fact, we saved it to a permanent location here:</p><pre id="copyThis" class="card-text myDrawingURL"></pre>
+            <button data-clipboard-text="#copyThis" id="copy" class="btn btn-primary">Copy link to clipboard</button>
+          </div>
+        </div>
+  </div>
+  <div class="submitButton">
    <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
   </div>
-  </div>
+
+</div>
 
   
   
@@ -84,7 +102,7 @@
       <img id="spot1" src="" />
       <div class="card-body">
         <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary" type="button" id="vote1" value="Vote" />
+        <input class="btn btn-primary vote" type="button" id="vote1" value="Vote" />
       </div>
     </div>
 
@@ -92,7 +110,7 @@
         <img id="spot2" src="" />
       <div class="card-body">
         <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary" type="button" id="vote2" value="Vote" />
+        <input class="btn btn-primary vote" type="button" id="vote2" value="Vote" />
       </div>
     </div>
 
@@ -100,7 +118,7 @@
         <img id="spot3" src="" />
       <div class="card-body">
         <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary" type="button" id="vote3" value="Vote" />
+        <input class="btn btn-primary vote" type="button" id="vote3" value="Vote" />
       </div>
     </div>
 
@@ -108,14 +126,22 @@
         <img id="spot4" src="" />
       <div class="card-body">
         <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary" type="button" id="vote4" value="Vote" />
+        <input class="btn btn-primary vote" type="button" id="vote4" value="Vote" />
       </div>
     </div>
       
 
 </div>
 
-
+<script>
+    var clipboard = new ClipboardJS(".btn");
+    clipboard.on("success", function(e) {
+      console.log(e);
+    });
+    clipboard.on("error", function(e) {
+      console.log(e);
+    });
+  </script>
 
 
   <!-- // Personal Photos -->

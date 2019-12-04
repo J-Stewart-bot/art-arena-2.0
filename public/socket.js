@@ -105,11 +105,22 @@ $(function() {
   $("#drawing-complete").click(function() {
     //when the client clicks SUBMIT
     $(this).css("display", "none");
+    save();
     $(".paintings");
+    $(".playingText").css("display", "none");
+    $(".votingText").css("display", "flex");
+    $("#canvasDiv").css("display", "none");
     var canvas = document.getElementById("my-canvas");
     var dataURL = canvas.toDataURL();
+    $(".drawingURL").css("display", "flex");
     // tell server to execute 'donedrawing' and send along one parameter
     socket.emit("donedrawing", dataURL);
+  });
+
+  // when the client clicks the "return to lobby" button at the end of a game.
+
+  $("#return").click(function() {
+    window.location.reload(true);
   });
 
   // when the client hits ENTER on their keyboard

@@ -37,6 +37,9 @@ main {
   padding: 10%;
 }
 
+pre {
+  white-space: pre-wrap;
+}
 // GLOBAL END
 
 // HEADER
@@ -103,15 +106,29 @@ header {
   font-family: $font-SUB-HEADING;
 }
 /* canvas */
+.waitingText {
+  display: flex;
+}
 .playingText {
   display: none;
 }
-.waitingText {
-  display: flex;
+.votingText {
+  display: none;
+}
+.winningText {
+  display: none;
+}
+.drawingURL {
+  margin-top: $margin;
+  display: none;
 }
 #my-canvas {
   border: 5px solid black;
   border-radius: $round;
+}
+
+#canvasDiv {
+  display: flex;
 }
 
 .canvas {
@@ -285,7 +302,7 @@ body {
 }
 
 .submitButton {
-  display: none;
+  display: flex;
   padding: padding;
   margin-top: $margin;
   margin-bottom: $margin;
@@ -344,4 +361,8 @@ body {
 h2.waiting {
   padding: 1rem;
   margin: 1rem;
+}
+
+.vote {
+  display: flex;
 }

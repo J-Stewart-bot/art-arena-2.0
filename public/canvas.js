@@ -298,6 +298,9 @@ const save = dir => {
       // Upload completed successfully, now we can get the download URL
       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
         console.log("File available at", downloadURL);
+        $(".myDrawingURL").text(downloadURL);
+        $("#myDrawing").attr("src", downloadURL);
+        $("#copy").attr("data-clipboard-text", downloadURL);
       });
     }
   );
