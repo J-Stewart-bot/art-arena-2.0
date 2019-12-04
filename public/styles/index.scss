@@ -243,6 +243,8 @@ span {
 
 .drawingURL {
   margin-top: $margin;
+  padding: 1rem;
+  width: 65vw;
   display: none;
 }
 #my-canvas {
@@ -301,8 +303,8 @@ span {
 }
 
 .toolbar {
-  // border: 5px solid black;
-  // padding: $padding;
+  width: 62vw;
+  text-align-last: center;
 }
 .color {
   height: 4rem;
@@ -372,7 +374,7 @@ span {
   padding: 1rem;
 }
 .placeholderimage {
-  width: 100%;
+  width: 62vw;
   padding: 1rem;
 }
 h2.waiting {
@@ -433,5 +435,21 @@ h2.waiting {
   }
   #userProfile {
     display: none;
+    visibility: hidden;
+  }
+}
+
+#smallScreen {
+  display: none;
+}
+
+@media screen and (max-width: 780px) {
+  #canvasDiv {
+    display: none;
+    visibility: hidden;
+  }
+  #smallScreen {
+    display: flex;
+    visibility: visible;
   }
 }

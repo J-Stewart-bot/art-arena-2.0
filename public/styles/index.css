@@ -241,6 +241,8 @@ span {
 
 .drawingURL {
   margin-top: 1rem;
+  padding: 1rem;
+  width: 65vw;
   display: none;
 }
 
@@ -280,6 +282,11 @@ span {
   font-size: 1rem;
   width: initial;
   margin: 1rem;
+}
+
+.toolbar {
+  width: 62vw;
+  text-align-last: center;
 }
 
 .color {
@@ -365,7 +372,7 @@ span {
 }
 
 .placeholderimage {
-  width: 100%;
+  width: 62vw;
   padding: 1rem;
 }
 
@@ -446,6 +453,24 @@ h2.waiting {
   }
   #userProfile {
     display: none;
+    visibility: hidden;
+  }
+}
+
+#smallScreen {
+  display: none;
+}
+
+@media screen and (max-width: 780px) {
+  #canvasDiv {
+    display: none;
+    visibility: hidden;
+  }
+  #smallScreen {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    visibility: visible;
   }
 }
 /*# sourceMappingURL=index.css.map */
