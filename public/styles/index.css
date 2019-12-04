@@ -304,9 +304,7 @@ span {
 }
 
 .submitButton {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding: padding;
   margin-top: 1rem;
   margin-bottom: 1rem;
