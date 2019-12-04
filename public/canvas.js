@@ -79,7 +79,7 @@ function randomPointInRadius(radius) {
 var controls = Object.create(null);
 
 controls.tool = function(cx) {
-  let select = elt("select", { class: "btn btn-primary dropdown-toggle" });
+  let select = elt("select", { class: "btn-primary dropdown-toggle" });
 
   // populate the tools
   for (var name in tools) select.appendChild(elt("option", null, name));
@@ -103,8 +103,7 @@ controls.tool = function(cx) {
 controls.color = function(cx) {
   let input = elt("input", {
     type: "color",
-    class: "btn btn-primary",
-    style: "height:4rem"
+    class: "btn-light color"
   });
 
   // on change, set the new color style for fill and stroke
@@ -112,12 +111,12 @@ controls.color = function(cx) {
     cx.fillStyle = input.value;
     cx.strokeStyle = input.value;
   });
-  return elt("span", null, "Color: ", input);
+  return elt("span", null, " Color:", input);
 };
 
 // brush size module
 controls.brushSize = function(cx) {
-  let select = elt("select", { class: "btn btn-primary dropdown-toggle" });
+  let select = elt("select", { class: "btn-primary dropdown-toggle" });
   // select.classList.add("select");
   // various brush sizes
   let sizes = [
@@ -232,7 +231,7 @@ controls.brushSize = function(cx) {
   select.addEventListener("change", function() {
     cx.lineWidth = select.value;
   });
-  return elt("span", null, "Brush size: ", select);
+  return elt("span", null, " Brush size:", select);
 };
 
 const download = () => {
