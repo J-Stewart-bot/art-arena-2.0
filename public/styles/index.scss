@@ -103,6 +103,12 @@ header {
   font-family: $font-SUB-HEADING;
 }
 /* canvas */
+.playingText {
+  display: none;
+}
+.waitingText {
+  display: flex;
+}
 #my-canvas {
   border: 5px solid black;
   border-radius: $round;
@@ -279,6 +285,7 @@ body {
 }
 
 .submitButton {
+  display: none;
   padding: padding;
   margin-top: $margin;
   margin-bottom: $margin;
@@ -296,12 +303,13 @@ body {
 //Paintings
 
 .paintings {
-  display: flex;
+  display: none;
   flex-flow: wrap;
+  text-align: center;
+  margin-top: $margin;
   justify-content: space-evenly;
   border: 5px solid black;
   border-radius: $round;
-  visibility: hidden;
   .card {
     display: flex;
     margin: 0.5rem;

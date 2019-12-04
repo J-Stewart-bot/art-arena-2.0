@@ -50,19 +50,17 @@ socket.on("updaterooms", function(rooms, current_room) {
     }
   });
   $("#currentRoom").empty();
-  $("#currentRoom").append(
-    `<h3>You are currently in the ${current_room} </h3>`
-  );
+  $("#currentRoom").append(`<h3>You are currently in ${current_room} </h3>`);
 });
 
-socket.on('updatespots', function(roomSpotsTaken) {
-  console.log(roomSpotsTaken['Arena #1'])
+socket.on("updatespots", function(roomSpotsTaken) {
+  console.log(roomSpotsTaken["Arena #1"]);
   $("#a1Spots").text(`${4 - roomSpotsTaken["Arena #1"]} spots left`);
   $("#a2Spots").text(`${4 - roomSpotsTaken["Arena #2"]} spots left`);
 });
 
 socket.on("displayphotos", function(images) {
-  $(".paintings").css("visibility", "visible");
+  $(".paintings").css("display", "flex");
   let i = 1;
   for (const image of Object.keys(images)) {
     if (image !== "reference") {
@@ -73,6 +71,9 @@ socket.on("displayphotos", function(images) {
 });
 
 socket.on("displayreference", function(images) {
+  $(".waitingText").css("display", "none");
+  $(".playingText").css("display", "flex");
+  $(".submitButton").css("display", "flex");
   $("#mainImage").attr("src", images.reference);
   $(".btn").css("visibility", "visible");
 });
@@ -103,7 +104,7 @@ $(function() {
   // when the client clicks submit
   $("#drawing-complete").click(function() {
     //when the client clicks SUBMIT
-    $(this).css("visibility", "hidden");
+    $(this).css("display", "none");
     $(".paintings");
     var canvas = document.getElementById("my-canvas");
     var dataURL = canvas.toDataURL();

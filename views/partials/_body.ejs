@@ -55,11 +55,6 @@
 <br>
   <div id="paint-app">
     <div class="imgRef">
-        <!-- <div class="spinner-border text-warning" role="status">
-            <span class="sr-only">Loading...</span>
-            
-          </div> -->
-          
 
         <img class="placeholder-image"
           id="mainImage"
@@ -69,9 +64,10 @@
         </img>
         
     </div> 
-    <div>
-        <h2 class="waiting">Waiting for friends to join... </h2>
+    <div class="waitingText">
+        <h2 class="waiting"><div class="spinner-border text-warning" role="status"></div> Waiting for friends to join... </h2>
     </div>
+    <div class="playingText"><h2 class="playing">Go Ahead! Draw a happy little picture.</h2></div>
     <div id="canvasDiv"></div>
 <div class="submitButton">
    <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
@@ -117,16 +113,12 @@
     </div>
       
 
+</div>
 
 
-  <div  aria-atomic="true" style="position: relative; min-height: 200px;">
-      <div style="position: absolute; top: 0; right: 0;">
-    
-        </div>
-  </div>
 
 
-  // Personal Photos
+  <!-- // Personal Photos -->
 
   <!-- <script>
     const uid = firebase.auth().currentUser.uid;

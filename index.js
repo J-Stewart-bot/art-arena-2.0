@@ -13,17 +13,21 @@ const io = require("socket.io")(server, {
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-
 // app.listen(8080);
 server.listen(process.env.PORT || 8080, () => {
   console.log("Server listening on Port 8080");
 });
 
 const randomImage = function() {
-  const defaultSize = 350;
+  const defaultWidth = 500;
+  const defaultHeight = 300;
   const randomNumber = Math.floor(Math.random() * 1048);
+  console.log(
+    "Random Image",
+    `https://picsum.photos/id/${randomNumber}/${defaultWidth}/${defaultHeight}`
+  );
 
-  return `https://picsum.photos/id/${randomNumber}/${defaultSize}/${defaultSize}`;
+  return `https://picsum.photos/id/${randomNumber}/${defaultWidth}/${defaultHeight}`;
 };
 
 const determineWinner = function(winners) {
@@ -78,7 +82,7 @@ const usernames = {};
 
 // rooms which are currently available in chat
 const rooms = ["Lobby", "Arena #1", "Arena #2"];
-const roomSpotsTaken = {"Lobby": 0, "Arena #1": 0, "Arena #2": 0}
+const roomSpotsTaken = { Lobby: 0, "Arena #1": 0, "Arena #2": 0 };
 const roomImages = {};
 const roomVotes = {};
 
@@ -86,7 +90,6 @@ const roomVotes = {};
 let img = randomImage();
 
 io.sockets.on("connection", function(socket) {
-  
   // when the client emits 'adduser', this listens and executes
   socket.on("adduser", function(username) {
     // store the username in the socket session for this client
@@ -191,8 +194,8 @@ io.sockets.on("connection", function(socket) {
     } else {
       console.log("FULL ROOM");
     }
-    console.log(roomSpotsTaken)
-    io.emit('updatespots', roomSpotsTaken)
+    console.log(roomSpotsTaken);
+    io.emit("updatespots", roomSpotsTaken);
   });
 
   socket.on("donedrawing", function(drawing) {
