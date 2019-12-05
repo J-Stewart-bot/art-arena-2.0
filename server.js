@@ -369,11 +369,11 @@ io.sockets.on("connection", function(socket) {
   socket.on("disconnect", function() {
     // echo globally that this client has left
 
-    socket.broadcast.emit(
-      "updatechat",
-      "SERVER",
-      socket.username[1] + " has disconnected"
-    );
+    // socket.broadcast.emit(
+    //   "updatechat",
+    //   "SERVER",
+    //   socket.username[1] + " has disconnected"
+    // );
     socket.leave(socket.room);
   });
 
