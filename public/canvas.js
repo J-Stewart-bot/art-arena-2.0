@@ -422,7 +422,7 @@ const save = dir => {
 controls.reset = function(cx) {
   let link = elt(
     "button",
-    { type: "button", class: "btn btn-danger reset", onclick: "reset()" },
+    { type: "button", class: "btn btn-danger reset", "data-toggle": "modal", "data-target": "#resetModal" },
     "Reset"
   );
   return link;
