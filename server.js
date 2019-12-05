@@ -174,7 +174,7 @@ io.sockets.on("connection", function(socket) {
         console.log("before")
         let stockImage = randomImage();
         console.log('after')
-        roomImages[newroom] = { reference: stockImage.src };
+        roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
