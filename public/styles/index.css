@@ -471,4 +471,12 @@ h2.waiting {
     visibility: visible;
   }
 }
+
+.toolbar {
+  max-width: 800px;
+}
+
+#canvasDiv {
+  max-width: 900px;
+}
 /*# sourceMappingURL=index.css.map */
