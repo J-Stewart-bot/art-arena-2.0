@@ -20,7 +20,6 @@
   "homepage": "https://github.com/Justin-Lighthouse/art-arena-2.0#readme",
   "dependencies": {
     "clipboard": "^2.0.4",
-    "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "node-sass-middleware": "^0.11.0",

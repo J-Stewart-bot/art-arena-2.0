@@ -30,14 +30,14 @@ const randomImage = function() {
   return `https://picsum.photos/id/${randomNumber}/500/300`;
 };
 
-const createRandomImage = () => {
-  const img = document.createElement("img");
-  img.setAttribute("id", "mainImage");
-  img.src = randomImage();
-  img.onerror = function() {
-    img.src = randomImage();
-  };
-  return img;
+// Random Random
+const randomRandom = () => {
+  const randomNumber = Math.ceil(Math.random() * 2);
+  if (randomNumber === 1) {
+    return randomCartoon();
+  } else {
+    return randomImage();
+  }
 };
 
 const determineWinner = function(winners) {
@@ -77,12 +77,16 @@ app.get("/", function(req, res) {
 
 // rooms which are currently available in chat
 const rooms = ["Lobby", "Arena #1", "Arena #2", "Arena #3"];
-const roomSpotsTaken = { "Lobby": 0, "Arena #1": 0, "Arena #2": 0, "Arena #3": 0};
+const roomSpotsTaken = {
+  Lobby: 0,
+  "Arena #1": 0,
+  "Arena #2": 0,
+  "Arena #3": 0
+};
 const roomImages = {};
 const roomVotes = {};
 
 io.sockets.on("connection", function(socket) {
-  
   // when the client emits 'adduser', this listens and executes
   socket.on("adduser", function(username) {
     // store the username in the socket session for this client
@@ -100,7 +104,9 @@ io.sockets.on("connection", function(socket) {
     socket.join("Lobby");
     roomSpotsTaken["Lobby"] += 1;
 
-    socket.broadcast.to("Lobby").emit("updatechat", "SERVER", value + " has connected to this room");
+    socket.broadcast
+      .to("Lobby")
+      .emit("updatechat", "SERVER", value + " has connected to this room");
     socket.emit("updaterooms", rooms, "Lobby");
   });
 
@@ -112,13 +118,19 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("switchRoom", function(newroom) {
     // leave the current room (stored in session)
-    
+
     if (newroom === "Lobby") {
       // join new room, received as function parameter
       // sent message to OLD room
       // update socket session room title
 
-      socket.broadcast.to(socket.room).emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+      socket.broadcast
+        .to(socket.room)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
 
@@ -126,16 +138,27 @@ io.sockets.on("connection", function(socket) {
       socket.room = newroom;
       roomSpotsTaken[newroom] += 1;
 
-      socket.broadcast.to(newroom).emit("updatechat", "SERVER", socket.username[1] + " has joined this room");
+      socket.broadcast
+        .to(newroom)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has joined this room"
+        );
       socket.emit("updaterooms", rooms, newroom);
-
     } else if (newroom === "Arena #1" && roomSpotsTaken["Arena #1"] < 4) {
       // join new room, received as function parameter
       // check how many people are in the room after a person joins
       // sent message to OLD room
       // update socket session room title
 
-      socket.broadcast.to(socket.room).emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+      socket.broadcast
+        .to(socket.room)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
 
@@ -143,23 +166,34 @@ io.sockets.on("connection", function(socket) {
       roomSpotsTaken[newroom] += 1;
       socket.room = newroom;
 
-      socket.broadcast.to(newroom).emit("updatechat", "SERVER", socket.username[1] + " has joined this room");
+      socket.broadcast
+        .to(newroom)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has joined this room"
+        );
       socket.emit("updaterooms", rooms, newroom);
-      
+
       if (roomSpotsTaken["Arena #1"] === 4) {
         let stockImage = randomCartoon();
         roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
-      
     } else if (newroom === "Arena #2" && roomSpotsTaken["Arena #2"] < 4) {
       // join new room, received as function parameter
       // check how many people are in the room after a person joins
       // sent message to OLD room
       // update socket session room title
 
-      socket.broadcast.to(socket.room).emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+      socket.broadcast
+        .to(socket.room)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
 
@@ -167,25 +201,36 @@ io.sockets.on("connection", function(socket) {
       roomSpotsTaken[newroom] += 1;
       socket.room = newroom;
 
-      socket.broadcast.to(newroom).emit("updatechat", "SERVER", socket.username[1] + " has joined this room");
+      socket.broadcast
+        .to(newroom)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has joined this room"
+        );
       socket.emit("updaterooms", rooms, newroom);
-      
+
       if (roomSpotsTaken["Arena #2"] === 4) {
-        console.log("before")
+        console.log("before");
         let stockImage = randomImage();
-        console.log('after')
+        console.log("after");
         roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
-      
     } else if (newroom === "Arena #3" && roomSpotsTaken["Arena #3"] < 2) {
       // join new room, received as function parameter
       // check how many people are in the room after a person joins
       // sent message to OLD room
       // update socket session room title
 
-      socket.broadcast.to(socket.room).emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+      socket.broadcast
+        .to(socket.room)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
       roomSpotsTaken[socket.room] -= 1;
       socket.leave(socket.room);
 
@@ -193,16 +238,21 @@ io.sockets.on("connection", function(socket) {
       roomSpotsTaken[newroom] += 1;
       socket.room = newroom;
 
-      socket.broadcast.to(newroom).emit("updatechat", "SERVER", socket.username[1] + " has joined this room");
+      socket.broadcast
+        .to(newroom)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has joined this room"
+        );
       socket.emit("updaterooms", rooms, newroom);
-      
+
       if (roomSpotsTaken["Arena #3"] === 2) {
-        let stockImage = randomCartoon();
+        let stockImage = randomRandom();
         roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
-      
     } else {
       console.log("Room Full, Sorry");
     }
@@ -211,7 +261,13 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("donedrawing", function(drawing) {
     roomImages[socket.room][socket.username[0]] = drawing;
-    socket.broadcast.to(socket.room).emit("updatechat", "SERVER", socket.username[1] + " has completed their painting");
+    socket.broadcast
+      .to(socket.room)
+      .emit(
+        "updatechat",
+        "SERVER",
+        socket.username[1] + " has completed their painting"
+      );
     if (Object.keys(roomImages[socket.room]).length === 5) {
       for (const user of Object.keys(roomImages[socket.room])) {
         if (user !== "reference") {
@@ -220,7 +276,10 @@ io.sockets.on("connection", function(socket) {
       }
       io.in(socket.room).emit("displayphotos", roomImages[socket.room]);
     }
-    if (socket.room === "Arena #3" && Object.keys(roomImages[socket.room]).length === 3) {
+    if (
+      socket.room === "Arena #3" &&
+      Object.keys(roomImages[socket.room]).length === 3
+    ) {
       for (const user of Object.keys(roomImages[socket.room])) {
         if (user !== "reference") {
           roomVotes[socket.room][roomImages[socket.room][user]] = 0;
@@ -234,9 +293,18 @@ io.sockets.on("connection", function(socket) {
     roomVotes[socket.room].total += 1;
     roomVotes[socket.room][key] += 1;
     if (roomVotes[socket.room].total === 4) {
-      io.in(socket.room).emit("displaywinner", determineWinner(roomVotes[socket.room]));
-    } else if (socket.room === "Arena #3" && roomVotes[socket.room].total === 2) {
-      io.in(socket.room).emit("displaywinner", determineWinner(roomVotes[socket.room]));
+      io.in(socket.room).emit(
+        "displaywinner",
+        determineWinner(roomVotes[socket.room])
+      );
+    } else if (
+      socket.room === "Arena #3" &&
+      roomVotes[socket.room].total === 2
+    ) {
+      io.in(socket.room).emit(
+        "displaywinner",
+        determineWinner(roomVotes[socket.room])
+      );
     }
   });
 
@@ -244,15 +312,19 @@ io.sockets.on("connection", function(socket) {
   socket.on("disconnect", function() {
     // echo globally that this client has left
 
-    socket.broadcast.emit("updatechat", "SERVER", socket.username[1] + " has disconnected");
+    socket.broadcast.emit(
+      "updatechat",
+      "SERVER",
+      socket.username[1] + " has disconnected"
+    );
     socket.leave(socket.room);
   });
 
-  socket.on('leave', function() {
+  socket.on("leave", function() {
     roomSpotsTaken[socket.room] -= 1;
     roomSpotsTaken["Lobby"] += 1;
     if (roomSpotsTaken[socket.room] === 0) {
       io.emit("updatespots", roomSpotsTaken);
     }
-  })
+  });
 });

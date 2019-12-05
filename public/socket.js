@@ -69,6 +69,10 @@ socket.on("displayphotos", function(images) {
       i++;
     }
   }
+  if (socket.room === "Arena #3") {
+    $("#spot3").css("display", "none");
+    $("#spot4").css("display", "none");
+  }
 });
 
 socket.on("displayreference", function(images) {
@@ -133,7 +137,7 @@ $(function() {
   // when the client clicks the "return to lobby" button at the end of a game.
 
   $("#return").click(function() {
-    socket.emit('leave');
+    socket.emit("leave");
     window.location.reload(true);
   });
 
