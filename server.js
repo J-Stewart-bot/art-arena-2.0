@@ -170,7 +170,7 @@ io.sockets.on("connection", function(socket) {
       socket.broadcast.to(newroom).emit("updatechat", "SERVER", socket.username[1] + " has joined this room");
       socket.emit("updaterooms", rooms, newroom);
       
-      if (roomSpotsTaken["Arena #2"] === 2) {
+      if (roomSpotsTaken["Arena #2"] === 4) {
         console.log("before")
         let stockImage = randomImage();
         console.log('after')
