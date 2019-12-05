@@ -38,6 +38,15 @@ const randomImage = function() {
   return `https://picsum.photos/id/${randomNumber}/${defaultWidth}/${defaultHeight}`;
 };
 
+const createRandomImage = () => {
+  const img = document.createElement("img");
+  img.src = randomImage();
+  img.onerror = function() {
+    img.src = randomImage();
+  };
+  return img;
+};
+
 const determineWinner = function(winners) {
   let winningValue = 0;
   let secondPlace = 0;
@@ -90,7 +99,7 @@ const usernames = {};
 
 // rooms which are currently available in chat
 const rooms = ["Lobby", "Arena #1", "Arena #2"];
-const roomSpotsTaken = { "Lobby": 0, "Arena #1": 0, "Arena #2": 0 };
+const roomSpotsTaken = { Lobby: 0, "Arena #1": 0, "Arena #2": 0 };
 const roomImages = {};
 const roomVotes = {};
 
