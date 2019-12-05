@@ -223,6 +223,8 @@ io.sockets.on("connection", function(socket) {
     roomVotes[socket.room][key] += 1;
     if (roomVotes[socket.room].total === 4) {
       io.in(socket.room).emit("displaywinner", determineWinner(roomVotes[socket.room]));
+    } else if (socket.room === "Arena #3" && roomVotes[socket.room].total === 2) {
+      io.in(socket.room).emit("displaywinner", determineWinner(roomVotes[socket.room]));
     }
   });
 
