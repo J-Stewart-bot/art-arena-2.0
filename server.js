@@ -7,8 +7,8 @@ const server = http.createServer(app);
 // var io = require("socket.io").listen(server);
 const io = require("socket.io")(server, {
   // below are engine.IO options
-  pingTimeout: 300000,
-  pingInterval: 250000
+  pingTimeout: 60000,
+  pingInterval: 25000
 });
 
 app.use(express.static("public"));
