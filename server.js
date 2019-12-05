@@ -128,32 +128,32 @@ io.sockets.on("connection", function(socket) {
       socket.emit("logout");
     }
     if (newroom === "Lobby") {
-      // join new room, received as function parameter
-      // sent message to OLD room
-      // update socket session room title
+      // // join new room, received as function parameter
+      // // sent message to OLD room
+      // // update socket session room title
 
-      socket.broadcast
-        .to(socket.room)
-        .emit(
-          "updatechat",
-          "SERVER",
-          socket.username[1] + " has left this room"
-        );
-      roomSpotsTaken[socket.room] -= 1;
-      socket.leave(socket.room);
+      // socket.broadcast
+      //   .to(socket.room)
+      //   .emit(
+      //     "updatechat",
+      //     "SERVER",
+      //     socket.username[1] + " has left this room"
+      //   );
+      // roomSpotsTaken[socket.room] -= 1;
+      // socket.leave(socket.room);
 
-      socket.join(newroom);
-      socket.room = newroom;
-      roomSpotsTaken[newroom] += 1;
+      // socket.join(newroom);
+      // socket.room = newroom;
+      // roomSpotsTaken[newroom] += 1;
 
-      socket.broadcast
-        .to(newroom)
-        .emit(
-          "updatechat",
-          "SERVER",
-          socket.username[1] + " has joined this room"
-        );
-      socket.emit("updaterooms", rooms, newroom);
+      // socket.broadcast
+      //   .to(newroom)
+      //   .emit(
+      //     "updatechat",
+      //     "SERVER",
+      //     socket.username[1] + " has joined this room"
+      //   );
+      // socket.emit("updaterooms", rooms, newroom);
     } else if (newroom === "Arena #1" && roomSpotsTaken["Arena #1"] < 4) {
       // join new room, received as function parameter
       // check how many people are in the room after a person joins
