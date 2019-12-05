@@ -176,7 +176,7 @@ io.sockets.on("connection", function(socket) {
         console.log('after')
         roomImages[newroom] = { reference: stockImage.src };
         roomVotes[newroom] = { total: 0 };
-        io.in(newroom).emit("displayreference", stockImage);
+        io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
       
     } else if (newroom === "Arena #3" && roomSpotsTaken["Arena #3"] < 2) {
