@@ -116,7 +116,7 @@ io.sockets.on("connection", function(socket) {
   // when the client emits 'sendchat', this listens and executes
   socket.on("sendchat", function(data) {
     // we tell the client to execute 'updatechat' with 2 parameters
-    if (!socket.username[1]) {
+    if (!socket.username) {
       socket.emit("logout");
     }
     io.sockets.in(socket.room).emit("updatechat", socket.username[1], data);
@@ -124,7 +124,7 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("switchRoom", function(newroom) {
     // leave the current room (stored in session)
-    if (!socket.username[1]) {
+    if (!socket.username) {
       socket.emit("logout");
     }
     if (newroom === "Lobby") {
