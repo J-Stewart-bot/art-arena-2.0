@@ -137,6 +137,11 @@ $(function() {
 
   // when the client clicks the "return to lobby" button at the end of a game.
 
+  $("#Lobby").click(function() {
+    socket.emit("leave");
+    window.location.reload(true);
+  });
+
   $("#return").click(function() {
     socket.emit("leave");
     window.location.reload(true);
