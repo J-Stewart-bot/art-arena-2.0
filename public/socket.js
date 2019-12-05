@@ -71,7 +71,7 @@ socket.on("displayphotos", function(images) {
   }
 });
 
-socket.on("displayreferencecartoon", function(images) {
+socket.on("displayreference", function(images) {
   $(".waitingText").css("display", "none");
   $(".playingText").css("display", "flex");
   $(".submitButton").css("display", "flex");
