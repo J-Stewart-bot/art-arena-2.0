@@ -380,6 +380,7 @@ io.sockets.on("connection", function(socket) {
     //   socket.username[1] + " has disconnected"
     // );
     socket.leave(socket.room);
+    socket.disconnect();
   });
 
   socket.on("leave", function() {
