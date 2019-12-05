@@ -121,7 +121,9 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("switchRoom", function(newroom) {
     // leave the current room (stored in session)
-
+    if (!socket.username[1]) {
+      socket.emit("logout");
+    }
     if (newroom === "Lobby") {
       // join new room, received as function parameter
       // sent message to OLD room

@@ -104,6 +104,21 @@ socket.on("displaywinner", function(image) {
   $("#paintings").css("display", "none");
 });
 
+socket.on('logout', function() {
+  firebase
+    .auth()
+    .signOut()
+    .then(function() {
+      // console.log("Signed out");
+      $("#userInfo").empty();
+      $(".authorized").hide();
+      $("#firebaseui-auth-container").show();
+    })
+    .catch(function(error) {
+      console.log("ERROR =>", error);
+    });
+})
+
 function switchRoom(room) {
   socket.emit("switchRoom", room);
 }
