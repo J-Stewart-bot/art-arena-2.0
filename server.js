@@ -97,7 +97,6 @@ io.sockets.on("connection", function(socket) {
     // send client to room 1
     // echo to client they've connected
     // echo to room 1 that a person has connected to their room
-
     let key = username.uid;
     let value = username.displayName;
     socket.username = [key, value];
@@ -126,8 +125,8 @@ io.sockets.on("connection", function(socket) {
     // leave the current room (stored in session)
     if (!socket.username) {
       socket.emit("logout");
-    }
-    if (newroom === "Lobby") {
+      return;
+    } else if (newroom === "Lobby") {
       // // join new room, received as function parameter
       // // sent message to OLD room
       // // update socket session room title
@@ -299,6 +298,7 @@ io.sockets.on("connection", function(socket) {
     }  else {
       console.log("Room Full, Sorry");
     }
+    
     io.emit("updatespots", roomSpotsTaken);
   });
 
