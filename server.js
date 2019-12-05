@@ -30,6 +30,16 @@ const randomImage = function() {
   return `https://picsum.photos/id/${randomNumber}/500/300`;
 };
 
+const createRandomImage = () => {
+  const img = document.createElement("img");
+  img.setAttribute("id", "mainImage");
+  img.src = randomImage();
+  img.onerror = function() {
+    img.src = randomImage();
+  };
+  return img;
+};
+
 const determineWinner = function(winners) {
   let winningValue = 0;
   let secondPlace = 0;
@@ -140,7 +150,7 @@ io.sockets.on("connection", function(socket) {
         let stockImage = randomCartoon();
         roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
-        io.in(newroom).emit("displayreference", roomImages[newroom]);
+        io.in(newroom).emit("displayreferencecartoon", roomImages[newroom]);
       }
       
     } else if (newroom === "Arena #2" && roomSpotsTaken["Arena #2"] < 4) {
@@ -161,10 +171,10 @@ io.sockets.on("connection", function(socket) {
       socket.emit("updaterooms", rooms, newroom);
       
       if (roomSpotsTaken["Arena #2"] === 4) {
-        let stockImage = randomCartoon();
-        roomImages[newroom] = { reference: stockImage };
+        let stockImage = createRandomImage();
+        roomImages[newroom] = { reference: stockImage.src };
         roomVotes[newroom] = { total: 0 };
-        io.in(newroom).emit("displayreference", roomImages[newroom]);
+        io.in(newroom).emit("displayreferencephoto", stockImage);
       }
       
     } else if (newroom === "Arena #3" && roomSpotsTaken["Arena #3"] < 2) {
@@ -188,7 +198,7 @@ io.sockets.on("connection", function(socket) {
         let stockImage = randomCartoon();
         roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
-        io.in(newroom).emit("displayreference", roomImages[newroom]);
+        io.in(newroom).emit("displayreferencecartoon", roomImages[newroom]);
       }
       
     } else {

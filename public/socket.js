@@ -71,11 +71,20 @@ socket.on("displayphotos", function(images) {
   }
 });
 
-socket.on("displayreference", function(images) {
+socket.on("displayreferencecartoon", function(images) {
   $(".waitingText").css("display", "none");
   $(".playingText").css("display", "flex");
   $(".submitButton").css("display", "flex");
   $("#mainImage").attr("src", images.reference);
+  $(".btn").css("visibility", "visible");
+});
+
+socket.on("displayreferencephoto", function(image) {
+  $(".waitingText").css("display", "none");
+  $(".playingText").css("display", "flex");
+  $(".submitButton").css("display", "flex");
+  $("#mainImage").css("display", "none");
+  $("imgRef").appendChild(image);
   $(".btn").css("visibility", "visible");
 });
 
