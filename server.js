@@ -208,6 +208,14 @@ io.sockets.on("connection", function(socket) {
       }
       io.in(socket.room).emit("displayphotos", roomImages[socket.room]);
     }
+    if (socket.room === "Arena #3" && Object.keys(roomImages[socket.room]).length === 3) {
+      for (const user of Object.keys(roomImages[socket.room])) {
+        if (user !== "reference") {
+          roomVotes[socket.room][roomImages[socket.room][user]] = 0;
+        }
+      }
+      io.in(socket.room).emit("displayphotos", roomImages[socket.room]);
+    }
   });
 
   socket.on("submitvote", function(key) {
