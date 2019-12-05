@@ -119,21 +119,6 @@ socket.on('logout', function() {
     });
 })
 
-socket.on('connect_timeout', (timeout) => {
-  firebase
-    .auth()
-    .signOut()
-    .then(function() {
-      // console.log("Signed out");
-      $("#userInfo").empty();
-      $(".authorized").hide();
-      $("#firebaseui-auth-container").show();
-    })
-    .catch(function(error) {
-      console.log("ERROR =>", error);
-    });
-})
-
 function switchRoom(room) {
   socket.emit("switchRoom", room);
 }
