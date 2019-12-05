@@ -33,7 +33,8 @@
         <div class="modal-footer">
           <button type="button" onclick="switchRoom('Arena #1')" class="btn btn-primary" data-dismiss="modal">Arena #1 : Cartoon Colosseum <span id="a1Spots" class="badge badge-light"> 4 spots left</span></button>
           <button type="button" onclick="switchRoom('Arena #2')" class="btn btn-primary" data-dismiss="modal">Arena #2 : Snapshot Stadium <span id="a2Spots" class="badge badge-light"> 4 spots left</span></button>
-          <button type="button" onclick="switchRoom('Arena #3')" class="btn btn-primary" data-dismiss="modal">Arena #3 : Doodle Duel <span id="a3Spots" class="badge badge-light"> 2 spots left</span></button>
+          <button type="button" onclick="switchRoom('Arena #3')" class="btn btn-primary" data-dismiss="modal">Arena #3 : Sketch Standoff <span id="a3Spots" class="badge badge-light"> 3 spots left</span></button>
+          <button type="button" onclick="switchRoom('Arena #4')" class="btn btn-primary" data-dismiss="modal">Arena #4 : Doodle Duel <span id="a4Spots" class="badge badge-light"> 2 spots left</span></button>
           <button type="button" onclick="reset()" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
         </div>
       </div>
@@ -79,6 +80,44 @@
     <div id="smallScreen" class="alert alert-danger" role="alert">Make your screen size a little larger to draw
       </div>
 
+  <div class="paintings" id="paintings">
+
+      <div class="card">
+        <img id="spot1" src="" />
+        <div class="card-body">
+          <h5 class="card-title">Vote 4 Me!</h5>
+          <input class="btn btn-primary vote" type="button" id="vote1" value="Vote" />
+        </div>
+      </div>
+  
+      <div class="card">
+          <img id="spot2" src="" />
+        <div class="card-body">
+          <h5 class="card-title">Vote 4 Me!</h5>
+          <input class="btn btn-primary vote" type="button" id="vote2" value="Vote" />
+        </div>
+      </div>
+  
+      <div class="card">
+          <img id="spot3" src="" />
+        <div class="card-body">
+          <h5 class="card-title">Vote 4 Me!</h5>
+          <input class="btn btn-primary vote" type="button" id="vote3" value="Vote" />
+        </div>
+      </div>
+  
+      <div class="card">
+          <img id="spot4" src="" />
+        <div class="card-body">
+          <h5 class="card-title">Vote 4 Me!</h5>
+          <input class="btn btn-primary vote" type="button" id="vote4" value="Vote" />
+        </div>
+      </div>
+        
+  
+  </div>
+
+
   <div id="canvasDiv"></div> 
 
   <div class="drawingURL">
@@ -98,42 +137,7 @@
 </div>
 
   
-  <div class="paintings" id="paintings">
 
-    <div class="card">
-      <img id="spot1" src="" />
-      <div class="card-body">
-        <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary vote" type="button" id="vote1" value="Vote" />
-      </div>
-    </div>
-
-    <div class="card">
-        <img id="spot2" src="" />
-      <div class="card-body">
-        <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary vote" type="button" id="vote2" value="Vote" />
-      </div>
-    </div>
-
-    <div class="card">
-        <img id="spot3" src="" />
-      <div class="card-body">
-        <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary vote" type="button" id="vote3" value="Vote" />
-      </div>
-    </div>
-
-    <div class="card">
-        <img id="spot4" src="" />
-      <div class="card-body">
-        <h5 class="card-title">Vote 4 Me!</h5>
-        <input class="btn btn-primary vote" type="button" id="vote4" value="Vote" />
-      </div>
-    </div>
-      
-
-</div>
 
 <script>
     var clipboard = new ClipboardJS(".btn");

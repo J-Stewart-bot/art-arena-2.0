@@ -7,8 +7,8 @@ const server = http.createServer(app);
 // var io = require("socket.io").listen(server);
 const io = require("socket.io")(server, {
   // below are engine.IO options
-  pingTimeout: 30000,
-  pingInterval: 30000
+  pingTimeout: 3000000,
+  pingInterval: 3000000
 });
 
 app.use(express.static("public"));
@@ -56,17 +56,18 @@ const determineWinner = function(winners) {
       }
     }
   }
-  if (winningValue === secondPlace) {
-    if (winningValue === 1) {
-      console.log("we have a four way tie");
-      return null;
-    } else {
-      console.log("we have a tie");
-      return null;
-    }
-  } else {
-    return winningPicture;
-  }
+  return winningPicture;
+  // if (winningValue === secondPlace) {
+  //   if (winningValue === 1) {
+  //     console.log("we have a four way tie");
+  //     return null;
+  //   } else {
+  //     console.log("we have a tie");
+  //     return null;
+  //   }
+  // } else {
+  //   return winningPicture;
+  // }
 };
 
 // routing
@@ -76,12 +77,13 @@ app.get("/", function(req, res) {
 });
 
 // rooms which are currently available in chat
-const rooms = ["Lobby", "Arena #1", "Arena #2", "Arena #3"];
+const rooms = ["Lobby", "Arena #1", "Arena #2", "Arena #3", "Arena #4"];
 const roomSpotsTaken = {
   Lobby: 0,
   "Arena #1": 0,
   "Arena #2": 0,
-  "Arena #3": 0
+  "Arena #3": 0,
+  "Arena #4": 0,
 };
 const roomImages = {};
 const roomVotes = {};
@@ -108,6 +110,7 @@ io.sockets.on("connection", function(socket) {
       .to("Lobby")
       .emit("updatechat", "SERVER", value + " has connected to this room");
     socket.emit("updaterooms", rooms, "Lobby");
+    io.emit("updatespots", roomSpotsTaken);
   });
 
   // when the client emits 'sendchat', this listens and executes
@@ -218,7 +221,7 @@ io.sockets.on("connection", function(socket) {
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
-    } else if (newroom === "Arena #3" && roomSpotsTaken["Arena #3"] < 2) {
+    } else if (newroom === "Arena #3" && roomSpotsTaken["Arena #3"] < 3) {
       // join new room, received as function parameter
       // check how many people are in the room after a person joins
       // sent message to OLD room
@@ -247,13 +250,48 @@ io.sockets.on("connection", function(socket) {
         );
       socket.emit("updaterooms", rooms, newroom);
 
-      if (roomSpotsTaken["Arena #3"] === 2) {
+      if (roomSpotsTaken["Arena #3"] === 3) {
         let stockImage = randomRandom();
         roomImages[newroom] = { reference: stockImage };
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
-    } else {
+    } else if (newroom === "Arena #4" && roomSpotsTaken["Arena #4"] < 2) {
+      // join new room, received as function parameter
+      // check how many people are in the room after a person joins
+      // sent message to OLD room
+      // update socket session room title
+
+      socket.broadcast
+        .to(socket.room)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has left this room"
+        );
+      roomSpotsTaken[socket.room] -= 1;
+      socket.leave(socket.room);
+
+      socket.join(newroom);
+      roomSpotsTaken[newroom] += 1;
+      socket.room = newroom;
+
+      socket.broadcast
+        .to(newroom)
+        .emit(
+          "updatechat",
+          "SERVER",
+          socket.username[1] + " has joined this room"
+        );
+      socket.emit("updaterooms", rooms, newroom);
+
+      if (roomSpotsTaken["Arena #4"] === 2) {
+        let stockImage = randomRandom();
+        roomImages[newroom] = { reference: stockImage };
+        roomVotes[newroom] = { total: 0 };
+        io.in(newroom).emit("displayreference", roomImages[newroom]);
+      }
+    }  else {
       console.log("Room Full, Sorry");
     }
     io.emit("updatespots", roomSpotsTaken);
@@ -278,6 +316,17 @@ io.sockets.on("connection", function(socket) {
     }
     if (
       socket.room === "Arena #3" &&
+      Object.keys(roomImages[socket.room]).length === 4
+    ) {
+      for (const user of Object.keys(roomImages[socket.room])) {
+        if (user !== "reference") {
+          roomVotes[socket.room][roomImages[socket.room][user]] = 0;
+        }
+      }
+      io.in(socket.room).emit("displayphotos", roomImages[socket.room]);
+    }
+    if (
+      socket.room === "Arena #4" &&
       Object.keys(roomImages[socket.room]).length === 3
     ) {
       for (const user of Object.keys(roomImages[socket.room])) {
@@ -299,6 +348,14 @@ io.sockets.on("connection", function(socket) {
       );
     } else if (
       socket.room === "Arena #3" &&
+      roomVotes[socket.room].total === 3
+    ) {
+      io.in(socket.room).emit(
+        "displaywinner",
+        determineWinner(roomVotes[socket.room])
+      );
+    } else if (
+      socket.room === "Arena #4" &&
       roomVotes[socket.room].total === 2
     ) {
       io.in(socket.room).emit(

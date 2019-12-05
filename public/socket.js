@@ -57,7 +57,8 @@ socket.on("updatespots", function(roomSpotsTaken) {
   console.log(roomSpotsTaken["Arena #1"]);
   $("#a1Spots").text(`${4 - roomSpotsTaken["Arena #1"]} out of 4 spots left`);
   $("#a2Spots").text(`${4 - roomSpotsTaken["Arena #2"]} out of 4 spots left`);
-  $("#a3Spots").text(`${2 - roomSpotsTaken["Arena #3"]} out of 2 spots left`);
+  $("#a3Spots").text(`${3 - roomSpotsTaken["Arena #3"]} out of 3 spots left`);
+  $("#a4Spots").text(`${2 - roomSpotsTaken["Arena #4"]} out of 2 spots left`);
 });
 
 socket.on("displayphotos", function(images) {
