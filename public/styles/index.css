@@ -241,6 +241,7 @@ span {
 
 .drawingURL {
   margin-top: 1rem;
+  max-width: 950px;
   padding: 1rem;
   width: 65vw;
   display: none;
