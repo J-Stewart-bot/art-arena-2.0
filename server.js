@@ -66,8 +66,8 @@ app.get("/", function(req, res) {
 });
 
 // rooms which are currently available in chat
-const rooms = ["Lobby", "Arena #1", "Arena #2"];
-const roomSpotsTaken = { "Lobby": 0, "Arena #1": 0, "Arena #2": 0};
+const rooms = ["Lobby", "Arena #1", "Arena #2", "Arena #3"];
+const roomSpotsTaken = { "Lobby": 0, "Arena #1": 0, "Arena #2": 0, "Arena #3": 0};
 const roomImages = {};
 const roomVotes = {};
 
@@ -167,6 +167,30 @@ io.sockets.on("connection", function(socket) {
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
       
+    } else if (newroom === "Arena #3" && roomSpotsTaken["Arena #3"] < 2) {
+      // join new room, received as function parameter
+      // check how many people are in the room after a person joins
+      // sent message to OLD room
+      // update socket session room title
+
+      socket.broadcast.to(socket.room).emit("updatechat", "SERVER", socket.username[1] + " has left this room");
+      roomSpotsTaken[socket.room] -= 1;
+      socket.leave(socket.room);
+
+      socket.join(newroom);
+      roomSpotsTaken[newroom] += 1;
+      socket.room = newroom;
+
+      socket.broadcast.to(newroom).emit("updatechat", "SERVER", socket.username[1] + " has joined this room");
+      socket.emit("updaterooms", rooms, newroom);
+      
+      if (roomSpotsTaken["Arena #3"] === 4) {
+        let stockImage = randomCartoon();
+        roomImages[newroom] = { reference: stockImage };
+        roomVotes[newroom] = { total: 0 };
+        io.in(newroom).emit("displayreference", roomImages[newroom]);
+      }
+      
     } else {
       console.log("Room Full, Sorry");
     }
@@ -201,4 +225,12 @@ io.sockets.on("connection", function(socket) {
     socket.broadcast.emit("updatechat", "SERVER", socket.username[1] + " has disconnected");
     socket.leave(socket.room);
   });
+
+  socket.on('leave', function() {
+    roomSpotsTaken[socket.room] -= 1;
+    roomSpotsTaken["Lobby"] += 1;
+    if (roomSpotsTaken[socket.room] === 0) {
+      io.emit("updatespots", roomSpotsTaken);
+    }
+  })
 });

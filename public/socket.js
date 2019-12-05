@@ -57,6 +57,7 @@ socket.on("updatespots", function(roomSpotsTaken) {
   console.log(roomSpotsTaken["Arena #1"]);
   $("#a1Spots").text(`${4 - roomSpotsTaken["Arena #1"]} spots left`);
   $("#a2Spots").text(`${4 - roomSpotsTaken["Arena #2"]} spots left`);
+  $("#a3Spots").text(`${2 - roomSpotsTaken["Arena #3"]} spots left`);
 });
 
 socket.on("displayphotos", function(images) {
@@ -123,6 +124,7 @@ $(function() {
   // when the client clicks the "return to lobby" button at the end of a game.
 
   $("#return").click(function() {
+    socket.emit('leave');
     window.location.reload(true);
   });
 
