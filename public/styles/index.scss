@@ -59,6 +59,7 @@ pre {
   align-items: center;
   padding: $padding;
   border: 5px solid black;
+  margin-top: $margin;
   border-radius: $round;
   #userInfo {
     text-align: center;
@@ -212,6 +213,17 @@ span {
   text-align: center;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  border: 5px solid black;
+  border-radius: $round;
+}
+
+.intro {
+  font-family: $font-SUB-HEADING;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: $margin;
   padding: 10px;
   border: 5px solid black;
   border-radius: $round;
@@ -432,9 +444,11 @@ h2.waiting {
     display: none;
     visibility: hidden;
   }
+
   #userProfile {
     display: none;
     visibility: hidden;
+    margin-top: $margin;
   }
 }
 
