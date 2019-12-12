@@ -51,6 +51,22 @@ socket.on("updaterooms", function(rooms, current_room) {
   });
   $("#currentRoom").empty();
   $("#currentRoom").append(`<h3>You are currently in ${current_room} </h3>`);
+  if (current_room === "Lobby") {
+    $("#currentRoom")
+      .append(`<p>Welcome to the lobby! Here you can chat with anybody else that is also in the lobby.
+      <br><br>
+      You may also doodle on the canvas to get familiar with the tools, then once your game starts, just save your image and reset your canvas.
+      <br><br>
+      All messages are localized to whichever room you are currently in.
+      <br><br>
+      All messages display for 10 seconds and then self distruct. 
+      <br><br>
+      There is no undo button for the canvas, there is only Happy Little Accidents 
+       <p>`);
+    console.log("You're in the Lobby");
+  } else {
+    console.log("It didn't work");
+  }
 });
 
 socket.on("updatespots", function(roomSpotsTaken) {
@@ -104,7 +120,7 @@ socket.on("displaywinner", function(image) {
   $("#paintings").css("display", "none");
 });
 
-socket.on('logout', function() {
+socket.on("logout", function() {
   firebase
     .auth()
     .signOut()
@@ -117,7 +133,7 @@ socket.on('logout', function() {
     .catch(function(error) {
       console.log("ERROR =>", error);
     });
-})
+});
 
 function switchRoom(room) {
   socket.emit("switchRoom", room);

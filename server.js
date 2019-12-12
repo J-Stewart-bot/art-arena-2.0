@@ -83,7 +83,7 @@ const roomSpotsTaken = {
   "Arena #1": 0,
   "Arena #2": 0,
   "Arena #3": 0,
-  "Arena #4": 0,
+  "Arena #4": 0
 };
 const roomImages = {};
 const roomVotes = {};
@@ -121,7 +121,7 @@ io.sockets.on("connection", function(socket) {
     io.sockets.in(socket.room).emit("updatechat", socket.username[1], data);
   });
 
-  socket.on("switchRoom", function(newroom) {
+  socket.on("switchR=oom", function(newroom) {
     // leave the current room (stored in session)
     if (!socket.username) {
       socket.emit("logout");
@@ -295,10 +295,10 @@ io.sockets.on("connection", function(socket) {
         roomVotes[newroom] = { total: 0 };
         io.in(newroom).emit("displayreference", roomImages[newroom]);
       }
-    }  else {
+    } else {
       console.log("Room Full, Sorry");
     }
-    
+
     io.emit("updatespots", roomSpotsTaken);
   });
 

@@ -91,7 +91,8 @@
     signInSuccessUrl: "/",
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
     tosUrl: "<your-tos-url>",
@@ -107,7 +108,8 @@
     console.log("🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️");
     console.log("🖌️ 🎨 Bob Ross.. We Salute You! 🎨 🖌️");
     console.log("🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️🖌️");
-    var user = firebase.auth.currentUser;
+    var user = firebase.auth().currentUser;
+    console.log("USER =>", user);
   });
 
   ui.start(`#firebaseui-auth-container`, uiConfig);

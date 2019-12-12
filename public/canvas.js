@@ -1,7 +1,11 @@
 // the core of the program; appends the paint interface to the
 // DOM element given as an argument (parent)
 function createPaint(parentElement) {
-  var canvas = elt("canvas", { id: "my-canvas", width: 500, height: 300 });
+  var canvas = elt("canvas", {
+    id: "my-canvas",
+    width: "620vw",
+    height: "360vh"
+  });
   var cx = canvas.getContext("2d");
   var toolbar = elt("div", { class: "toolbar" });
 
@@ -234,12 +238,13 @@ controls.brushSize = function(cx) {
   return elt("span", null, " Brush size:", select);
 };
 
-
 // Currently needs to be fixed, wont work as a button, will work as text however
 const download = () => {
   var canvas = document.getElementById("my-canvas");
-  image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  var link = document.createElement('a');
+  image = canvas
+    .toDataURL("image/png")
+    .replace("image/png", "image/octet-stream");
+  var link = document.createElement("a");
   link.download = "my-image.png";
   link.href = image;
   link.click();
@@ -422,7 +427,12 @@ const save = dir => {
 controls.reset = function(cx) {
   let link = elt(
     "button",
-    { type: "button", class: "btn btn-danger reset", "data-toggle": "modal", "data-target": "#resetModal" },
+    {
+      type: "button",
+      class: "btn btn-danger reset",
+      "data-toggle": "modal",
+      "data-target": "#resetModal"
+    },
     "Reset"
   );
   return link;

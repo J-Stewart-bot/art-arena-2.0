@@ -35,13 +35,51 @@
       $(function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            // console.log("User is signed in");
+            var db = firebase.firestore();
+            // db.collection("rooms")
+            //   .add({
+            //     players: [
+            //       {
+            //         id: firebase.auth().currentUser.uid,
+            //         completion: new Date()
+            //       }
+            //     ],
+            //     limit: 172800000,
+            //     type: "random",
+            //     state: "waiting",
+            //     startDate: Date.now()
+            //   })
+            //   .then(function(docRef) {
+            //     console.log("Document written with ID: ", docRef.id);
+            //   })
+            //   .catch(function(error) {
+            //     console.error("Error adding document: ", error);
+            //   });
+
+            // This recalls any rooms that the user is in
+            db.collection("rooms")
+              .get()
+              .then(querySnapshot => {
+                let rooms = [];
+                querySnapshot.forEach(room => {
+                  rooms.push(room.data());
+                  rooms[rooms.length - 1].id = room.id;
+                  console.log(`${room.id} => ${room.data()}`);
+                });
+                const myRooms = rooms.filter(room =>
+                  room.players.find(player => player.id === user.uid)
+                );
+                console.log("MY-ROOMS =>", myRooms);
+              });
+
+            console.log("User is signed in");
             if ($(window).width() >= 600) {
               $(".authorized").show();
             }
             $("#firebaseui-auth-container").hide();
-            $("#userProfile").append(
-              `<div id='userInfo'>
+            if (firebase.auth().currentUser.photoURL) {
+              $("#userProfile").append(
+                `<div id='userInfo'>
                 <img
                 id="userPhoto"
                 src="${firebase.auth().currentUser.photoURL}"
@@ -51,7 +89,21 @@
               <button class="btn btn-danger" id="logout">logout</button>
               </div>
               `
-            );
+              );
+            } else {
+              $("#userProfile").append(
+                `<div id='userInfo'>
+                <img
+                id="userPhoto"
+                src="${"https://www.freepngimg.com/thumb/marketing/63802-engine-search-certification-marketing-optimization-digital-professional.png"}"
+                alt="User Photo"
+              />
+              <h2>Welcome ${firebase.auth().currentUser.displayName}</h2>
+              <button class="btn btn-danger" id="logout">logout</button>
+              </div>
+              `
+              );
+            }
             socket.emit("adduser", firebase.auth().currentUser);
             $("#logout").click(function() {
               firebase
