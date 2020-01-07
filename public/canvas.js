@@ -784,5 +784,3 @@ tools["Flood Fill"] = function(event, cx) {
 // initialize the app
 let appDiv = document.getElementById("canvasDiv");
 createPaint(appDiv);
-
-// UNDO
