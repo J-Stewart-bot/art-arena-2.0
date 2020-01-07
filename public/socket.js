@@ -35,10 +35,11 @@ socket.on("updatechat", function(username, data) {
 
 // listener, whenever the server emits 'updaterooms', this updates the room the client is in
 socket.on("updaterooms", function(rooms, current_room) {
+  console.log("updating rooms!");
   $(".toast").toast("show");
   $("#rooms").empty();
   $.each(rooms, function(key, value) {
-    if (value == current_room) {
+    if (value === current_room) {
       $(".toast").toast("show");
       // $("#rooms").append("<div>" + value + "</div>");
       //console.log(current_room)
@@ -60,8 +61,6 @@ socket.on("updaterooms", function(rooms, current_room) {
       All messages are localized to whichever room you are currently in.
       <br><br>
       All messages display for 10 seconds and then self distruct. 
-      <br><br>
-      There is no undo button for the canvas, there is only Happy Little Accidents 
        <p>`);
     console.log("You're in the Lobby");
   } else {
@@ -136,7 +135,27 @@ socket.on("logout", function() {
 });
 
 function switchRoom(room) {
+  console.log("Switching rooms => ", room);
   socket.emit("switchRoom", room);
+}
+
+function joinRoom(roomId) {
+  var db = firebase.firestore();
+  var room = db.collection("rooms").doc(roomId);
+  room
+    .update({
+      players: firebase.firestore.FieldValue.arrayUnion({
+        id: firebase.auth().currentUser.uid,
+        completion: new Date()
+      })
+    })
+    .then(function() {
+      console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+    });
 }
 
 // on load of page
