@@ -17,6 +17,84 @@ function createPaint(parentElement) {
   parentElement.appendChild(elt("div", { id: "toRemove" }, panel, toolbar));
 }
 
+const state = [];
+
+const undo = cx => {
+  var canvas = document.getElementById("my-canvas");
+  var context = canvas.getContext("2d");
+  const prevState = state.length - 2;
+  console.log("you made it to undo");
+  state.pop();
+  let newImageSrc = state[prevState];
+  console.log("State Length => ", state.length);
+  var img = new Image();
+  img.src = newImageSrc;
+
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  img.onload = function() {
+    context.drawImage(img, 0, 0);
+  };
+
+  // $("canvas").attr("width", "620vw");
+  // var img = Element("img", { src: state[prevState] });
+  // $("canvas").drawImage(0, 0, 600, 400, 0, 0, 600, 400);
+  // $("canvas").attr("src", newImageSrc);
+  // $("canvas").drawImage(img, 0, 0);
+
+  // $("#my-canvas").attr("src", state[prevState]);
+  // let img = new Element("img", { src: state[prevState] });
+
+  // var div = document.getElementById("#my-canvas");
+  // div.remove();
+  // createPaint(appDiv);
+
+  // img.onload = function() {
+  //   c.drawImage(img, 0, 0);
+  //   console.log("drawing Image");
+  //   // cx.clearRect(0, 0, 600, 400);
+  //   // cx.drawImage(img, 0, 0, 600, 400, 0, 0, 600, 400);
+  // };
+};
+
+// const history = {
+//   redo_list: [],
+//   undo_list: [],
+//   saveState: function(cx, list, keep_redo) {
+//     keep_redo = keep_redo || false;
+//     if (!keep_redo) {
+//       this.redo_list = [];
+//     }
+
+//     (list || this.undo_list).push(canvas.toDataURL());
+//   },
+//   undo: function(canvas, cx) {
+//     console.log("you made it to undo");
+//     this.restoreState(canvas, cx, this.undo_list, this.redo_list);
+//   },
+//   redo: function(canvas, cx) {
+//     this.restoreState(canvas, cx, this.redo_list, this.undo_list);
+//   },
+//   restoreState: function(canvas, cx, pop, push) {
+//     if (pop.length) {
+//       this.saveState(canvas, push, true);
+//       var restore_state = pop.pop();
+//       var img = new Element("img", { src: restore_state });
+//       img.onload = function() {
+//         // cx.clearRect(0, 0, 600, 400);
+//         // cx.drawImage(img, 0, 0, 600, 400, 0, 0, 600, 400);
+//       };
+//     }
+//   }
+// };
+// $("undo").addEvent("click", function() {
+//   history.undo(canvas, cx);
+// });
+
+// $("redo").addEvent("click", function() {
+//   history.redo(canvas, cx);
+// });
+
 function reset(cx) {
   var div = document.getElementById("toRemove");
   div.remove();
@@ -87,11 +165,19 @@ controls.tool = function(cx) {
 
   // populate the tools
   for (var name in tools) select.appendChild(elt("option", null, name));
+  cx.canvas.addEventListener("mouseup", function(event) {
+    state.push(document.getElementById("my-canvas").toDataURL());
+    console.log(state);
+    console.log("State Length => ", state.length);
+  });
 
+  // const undo = () => {
+  //   console.log("you made it to undo");
+  // };
   // calls the particular method associated with the current tool
   cx.canvas.addEventListener("mousedown", function(event) {
     // is the left mouse button being pressed?
-    if (event.which == 1) {
+    if (event.which === 1) {
       // the event needs to be passed to the method to determine
       // what the mouse is doing and where it is
       tools[select.value](event, cx);
@@ -241,7 +327,7 @@ controls.brushSize = function(cx) {
 // Currently needs to be fixed, wont work as a button, will work as text however
 const download = () => {
   var canvas = document.getElementById("my-canvas");
-  image = canvas
+  let image = canvas
     .toDataURL("image/png")
     .replace("image/png", "image/octet-stream");
   var link = document.createElement("a");
@@ -250,6 +336,26 @@ const download = () => {
   link.click();
 };
 
+controls.undo = function() {
+  let link = elt(
+    "button",
+    {
+      type: "button",
+      class: "btn-info btn undo",
+      onclick: "undo()"
+    },
+    "Undo"
+  );
+  return link;
+};
+// controls.redo = function() {
+//   let link = elt(
+//     "button",
+//     { type: "button", class: "btn-info btn redo", onclick: "redo(cx)" },
+//     "Redo"
+//   );
+//   return link;
+// };
 controls.download = function() {
   let link = elt(
     "button",
@@ -678,3 +784,5 @@ tools["Flood Fill"] = function(event, cx) {
 // initialize the app
 let appDiv = document.getElementById("canvasDiv");
 createPaint(appDiv);
+
+// UNDO
