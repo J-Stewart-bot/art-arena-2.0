@@ -6,7 +6,9 @@
 
 ---
 
-This project was created in 2 weeks by Terrence Kuiper & Justin Stewart as part of their final project of the 2019 Lighthouse Labs Bootcamp (Victoria, BC, CANADA)
+This project was created in 2 weeks by Terrence Kuiper & Justin Stewart as part of their final project of the 2019 Lighthouse Labs Bootcamp (Victoria, BC, CANADA).
+
+Post bootcamp, Laurent Debacker has joined the crew.
 
 ---
 

@@ -45,12 +45,14 @@
         <div class="modal-body">
           Pick an arena to play in, or stay and chat in the lobby.
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" id="roomButtons">
           <button type="button" onclick="switchRoom('Arena #1')" class="btn btn-primary" data-dismiss="modal">Arena #1 : Cartoon Colosseum <span id="a1Spots" class="badge badge-light"> 4 spots left</span></button>
           <button type="button" onclick="switchRoom('Arena #2')" class="btn btn-primary" data-dismiss="modal">Arena #2 : Snapshot Stadium <span id="a2Spots" class="badge badge-light"> 4 spots left</span></button>
           <button type="button" onclick="switchRoom('Arena #3')" class="btn btn-primary" data-dismiss="modal">Arena #3 : Sketch Standoff <span id="a3Spots" class="badge badge-light"> 3 spots left</span></button>
           <button type="button" onclick="switchRoom('Arena #4')" class="btn btn-primary" data-dismiss="modal">Arena #4 : Doodle Duel <span id="a4Spots" class="badge badge-light"> 2 spots left</span></button>
           <button type="button" id="Lobby" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
+          <button type="button" id="myRooms" class="btn btn-success" data-dismiss="modal">My Rooms</button>
+
         </div>
       </div>
     </div>
@@ -59,13 +61,7 @@
   <div id="rooms"></div>
 </div> 
 <!-- End of the rooms section -->
-  <br>
-<div class="chat">
-    <span id="conversation">
-      <input id="data" placeholder="Type your message here." />
-      <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
-    </span> 
-</div>
+
 <br>
   <div id="paint-app">
     <div class="imgRef">
@@ -150,7 +146,14 @@
 
 </div>
 
-  
+<br>
+<div class="chat">
+    <span id="conversation">
+      <input id="data" placeholder="Type your message here." />
+      <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
+    </span> 
+</div>
+
 
 
 <script>

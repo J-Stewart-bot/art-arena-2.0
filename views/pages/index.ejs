@@ -64,11 +64,19 @@
                 querySnapshot.forEach(room => {
                   rooms.push(room.data());
                   rooms[rooms.length - 1].id = room.id;
-                  console.log(`${room.id} => ${room.data()}`);
                 });
                 const myRooms = rooms.filter(room =>
                   room.players.find(player => player.id === user.uid)
                 );
+                const availableRooms = rooms.filter(room =>
+                  room.state === 'waiting' && !room.players.find(player => player.id === user.uid)
+                );
+                myRooms.forEach(room => {
+                  $('#roomButtons').append(`<button type="button" id="room_${room.id}" class="btn btn-success" data-dismiss="modal" onclick="openRoom('${room.id}')">${room.name}</button>`)
+                });
+                availableRooms.forEach(room => {
+                  $('#roomButtons').append(`<button type="button" id="room_${room.id}" class="btn btn-warning" data-dismiss="modal" onclick="joinRoom('${room.id}')">${room.name}</button>`)
+                });
                 console.log("MY-ROOMS =>", myRooms);
               });
 
